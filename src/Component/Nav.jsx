@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { NavLink } from "react-router-dom";
+import { UserAuthContext } from "../Authentication/Authentication";
 
 const Nav = () => {
+  const {user}=useContext(UserAuthContext)
   return (
     <div className="bg-teal-900">
       <Navbar fluid rounded className="w-11/12 mx-auto max-w-[1600px] py-4 bg-teal-900">
         <Navbar.Brand href="https://flowbite-react.com">
-          <span className="self-center whitespace-nowrap text-xl font-semibold uppercase text-white">
-            StaffMate
+          <span className="self-center whitespace-nowrap text-xl font-bold uppercase text-white">
+            Staf<span className="text-secondary text-3xl font-extrabold italic">fM</span>ate 
           </span>
         </Navbar.Brand>
         <div className="flex md:order-2">
-          <Dropdown
+          {
+            user?<Dropdown
             arrowIcon={false}
             inline
             label={
@@ -34,7 +37,11 @@ const Nav = () => {
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>
+          </Dropdown>:<div className="flex gap-5">
+            <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Login</button>
+            <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Registration</button>
+          </div>
+          }
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
