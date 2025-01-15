@@ -5,6 +5,7 @@ import axios from "axios";
 import { FaUserPlus } from "react-icons/fa";
 import { Spinner } from "flowbite-react";
 import FadeLoader from "react-spinners/FadeLoader";
+import usePublic from "../Hook/usePublic";
 const RegistrationForm = () => {
   const [photoUrl, setPhotoUrl] = useState(null); // State to hold the uploaded photo URL
 
@@ -45,12 +46,13 @@ const RegistrationForm = () => {
     designation: Yup.string().required("Designation is required"),
     salary: Yup.number().required("Salary is required"),
     bank_account_no: Yup.string().required("Bank Account Number is required"),
-    photo: Yup.string().url("Invalid image URL"), // Validation for photo
+    photo: Yup.string().url("Invalid image URL"), 
   });
-
-  // Handle form submission
-  const handleSubmit = (values) => {
-    console.log(values); // Log the form values
+  
+  const publicAxios=usePublic()
+  
+  const handleSubmit = async (values) => {
+    const {data}=await publicAxios.post(`/user`,values)
   };
 
   return (
@@ -180,7 +182,7 @@ const RegistrationForm = () => {
                   Bank Account Number
                 </label>
                 <Field
-                  type="text"
+                  type="number"
                   id="bank_account_no"
                   name="bank_account_no"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
