@@ -5,6 +5,8 @@ import { UserAuthContext } from "../Authentication/Authentication";
 
 const Nav = () => {
   const { user } = useContext(UserAuthContext);
+  
+  
 
   return (
     <div className="bg-teal-900  w-full top-0 z-50 text-white">
@@ -50,37 +52,56 @@ const Nav = () => {
               </li>
             </ul>
           </div>
-          <a className=" uppercase text-xl"> Staf<span className="text-secondary text-3xl font-extrabold italic">fM</span>ate</a>
+          <a className=" uppercase text-xl">
+            {" "}
+            Staf
+            <span className="text-secondary text-3xl font-extrabold italic">
+              fM
+            </span>
+            ate
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-7">
-          <NavLink to="/" className="text-white text-lg">
-            Home
-          </NavLink>
-          <NavLink to="/about" className="text-white text-lg">
-            About
-          </NavLink>
-          <NavLink to="/services" className="text-white text-lg">
-            Services
-          </NavLink>
-          <NavLink to="/pricing" className="text-white text-lg">
-            Pricing
-          </NavLink>
-          <NavLink to="/contact" className="text-white text-lg">
-            Contact
-          </NavLink>
+            <NavLink to="/" className="text-white text-lg">
+              Home
+            </NavLink>
+            <NavLink to="/about" className="text-white text-lg">
+              About
+            </NavLink>
+            
+            <NavLink to="/pricing" className="text-white text-lg">
+             Go to DashBoard
+            </NavLink>
+            <NavLink to="/contact" className="text-white text-lg">
+              Contact
+            </NavLink>
           </ul>
         </div>
         <div className="navbar-end">
-          {
-            user?'':<div className="flex gap-5">
-            <NavLink to="/login">
-              <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Login</button>
-            </NavLink>
-            <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Registration</button>
-          </div>
-          }
-          
+          {user ? (
+            <div className="flex gap-3">
+              <img className="h-10 w-10 rounded-full border"
+                src={
+                  user?.photoURL ||
+                  "https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg"
+                }
+                alt="User"
+              />
+              <button className="bg-secondary px-4 rounded-lg text-lg font-semibold">Logout</button>
+            </div>
+          ) : (
+            <div className="flex gap-5">
+              <NavLink to="/login">
+                <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
+                  Login
+                </button>
+              </NavLink>
+              <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
+                Registration
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

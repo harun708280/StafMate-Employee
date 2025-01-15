@@ -6,10 +6,13 @@ import { FaUserPlus } from "react-icons/fa";
 import { Spinner } from "flowbite-react";
 import FadeLoader from "react-spinners/FadeLoader";
 import usePublic from "../Hook/usePublic";
+import useAuth from "../Hook/useAuth";
+import { useNavigate } from "react-router-dom";
+
 const RegistrationForm = () => {
   const [photoUrl, setPhotoUrl] = useState(null); // State to hold the uploaded photo URL
 
-  // Handle photo upload to ImgBB
+  const navigate=useNavigate()
   const handlePhotoUpload = async (event, setFieldValue) => {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -50,10 +53,42 @@ const RegistrationForm = () => {
   });
   
   const publicAxios=usePublic()
+  const {user,CreateAccount,update,setIsLoading,isLoading}=useAuth()
+  console.log(user);
+  
+  
+  
   
   const handleSubmit = async (values) => {
-    const {data}=await publicAxios.post(`/user`,values)
+    try {
+      console.log("Form Values:", values, "Photo URL:", photoUrl);
+  
+      // Create the user with email and password
+      const result = await CreateAccount(values.email, values.password);
+      console.log("Account Created:", result);
+  
+      // Update the user's name and photo
+      await update(values.name, photoUrl);
+      console.log("User Updated");
+  
+      // Send user data to the server
+      const response = await publicAxios.post("/user", values);
+      console.log("User data posted to the server:", response.data);
+      setIsLoading(false)
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+    finally{
+
+      if (!isLoading) {
+        navigate('/')
+      }
+
+    }
   };
+  
+  
+  
 
   return (
     <div className="flex justify-center items-center mt-12">
@@ -71,12 +106,11 @@ const RegistrationForm = () => {
             name: "",
             email: "",
             password: "",
-
             role: "",
             designation: "",
             salary: "",
             bank_account_no: "",
-            photo: "", // Initialize the photo field
+            photo: "", 
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
