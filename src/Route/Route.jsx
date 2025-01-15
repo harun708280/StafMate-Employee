@@ -6,6 +6,7 @@ import Login from "../Page/Login";
 import RegistrationForm from "../Page/RegistrationForm";
 import DashLyout from "../Layout/DashLyout";
 import Overview from "../Empolye/Overview";
+import WorkSheetForm from "../Empolye/WorkSheetForm";
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,12 @@ const router = createBrowserRouter([
         {
           path:'/dashboard',
           element:<Overview></Overview>
+        },
+        {
+          path:'/dashboard/work-sheet',
+          element:<WorkSheetForm></WorkSheetForm>
         }
+        
       ]
     }
   ]);

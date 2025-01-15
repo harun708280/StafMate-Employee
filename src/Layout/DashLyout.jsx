@@ -4,9 +4,11 @@ import { Outlet } from 'react-router-dom';
 
 const DashLyout = () => {
     return (
-        <div className='bg-[#020a13] min-h-svh flex gap-20 text-white'>
+        <div className='bg-[#020a13] min-h-svh flex gap-12 text-white'>
             <DashNav></DashNav>
+            <div className="max-w-[1600px] ">
             <Outlet></Outlet>
+            </div>
         </div>
     );
 };
