@@ -2,9 +2,17 @@ import React, { useContext } from "react";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { NavLink } from "react-router-dom";
 import { UserAuthContext } from "../Authentication/Authentication";
+import toast from "react-hot-toast";
 
 const Nav = () => {
-  const { user } = useContext(UserAuthContext);
+  const { user,Logout } = useContext(UserAuthContext);
+
+  const handleLogout=()=>{
+    Logout()
+    .then(result=>{
+      toast.success('successfully logout')
+    })
+  }
   
   
 
@@ -88,7 +96,7 @@ const Nav = () => {
                 }
                 alt="User"
               />
-              <button className="bg-secondary px-4 rounded-lg text-lg font-semibold">Logout</button>
+              <button onClick={handleLogout} className="bg-secondary px-4 rounded-lg text-lg font-semibold">Logout</button>
             </div>
           ) : (
             <div className="flex gap-5">
