@@ -60,7 +60,7 @@ const Nav = () => {
               </li>
             </ul>
           </div>
-          <a className=" uppercase text-xl">
+          <a className=" uppercase font-bold text-xl">
             {" "}
             Staf
             <span className="text-secondary text-3xl font-extrabold italic">
@@ -105,9 +105,9 @@ const Nav = () => {
                   Login
                 </button>
               </NavLink>
-              <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
+              <NavLink to='/register'><button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
                 Registration
-              </button>
+              </button></NavLink>
             </div>
           )}
         </div>

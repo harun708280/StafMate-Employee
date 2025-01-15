@@ -3,8 +3,34 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { FaUserLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import sample from './../../node_modules/lodash-es/sample';
+import useAuth from "../Hook/useAuth";
+import usePublic from "../Hook/usePublic";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const navigate=useNavigate()
+  const { LoginGoogle } = useAuth();
+  const publicAxios=usePublic()
+  const handleGoogle = () => {
+    LoginGoogle().then(async (result) => {
+      const dataUser = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        role: "Employee",
+
+        designation:'Sales Assistant',
+        salary:20000,
+        bank_account_no:4242424242424242,
+        photo:result?.user?.photoURL
+      };
+      const {data}=await publicAxios.post('/user',dataUser)
+      
+      
+      navigate('/')
+      
+      
+    });
+  };
   const initialValues = {
     email: "",
     password: "",
@@ -26,15 +52,34 @@ const Login = () => {
   };
 
   return (
-    <div className=""> {/* Added margin-top to ensure spacing from navbar */}
+    <div className="">
+      {" "}
+      {/* Added margin-top to ensure spacing from navbar */}
       <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">
-        <h2 className="text-2xl font-bold text-center mb-6 uppercase flex  items-center justify-center gap-3"> <span><FaUserLock /></span>  Login Staf<span className="text-secondary text-3xl font-extrabold italic">fM</span>ate</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 uppercase flex  items-center justify-center gap-3">
+          {" "}
+          <span>
+            <FaUserLock />
+          </span>{" "}
+          Login Staf
+          <span className="text-secondary text-3xl font-extrabold italic">
+            fM
+          </span>
+          ate
+        </h2>
         <div className="text-center mt-4">
-          <button className="w-full py-2 px-4  border-2 rounded-md  transition flex  items-center justify-center mt-2 gap-3 font-medium">
-         <span><FcGoogle /></span>  Continue with Google 
+          <button
+            onClick={handleGoogle}
+            className="w-full py-2 px-4  border-2 rounded-md  transition flex  items-center justify-center mt-2 gap-3 font-medium"
+          >
+            <span>
+              <FcGoogle />
+            </span>{" "}
+            Continue with Google
           </button>
         </div>
-        <p className="text-sm text-gray-600 text-center my-3">Or</p>
+        <hr className="my-3" />
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -52,7 +97,11 @@ const Login = () => {
                   name="email"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
-                <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
               </div>
 
               <div className="mb-4">
@@ -65,9 +114,12 @@ const Login = () => {
                   name="password"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
-                <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
               </div>
-              
 
               <div className="text-center mt-3">
                 <button
@@ -79,17 +131,16 @@ const Login = () => {
                 </button>
               </div>
             </Form>
-            
           )}
         </Formik>
         <div className=" mt-4">
-            <p className="text-sm">
-              Don’t have an account?{" "}
-              <a href="/register" className="text-teal-900 font-medium">
-                Register
-              </a>
-            </p>
-          </div>
+          <p className="text-sm">
+            Don’t have an account?{" "}
+            <a href="/register" className="text-teal-900 font-medium">
+              Register
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
