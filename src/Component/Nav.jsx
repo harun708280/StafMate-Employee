@@ -4,47 +4,56 @@ import { NavLink } from "react-router-dom";
 import { UserAuthContext } from "../Authentication/Authentication";
 
 const Nav = () => {
-  const {user}=useContext(UserAuthContext)
+  const { user } = useContext(UserAuthContext);
+
   return (
-    <div className="bg-teal-900">
-      <Navbar fluid rounded className="w-11/12 mx-auto max-w-[1600px] py-4 bg-teal-900">
-        <Navbar.Brand href="https://flowbite-react.com">
-          <span className="self-center whitespace-nowrap text-xl font-bold uppercase text-white">
-            Staf<span className="text-secondary text-3xl font-extrabold italic">fM</span>ate 
-          </span>
-        </Navbar.Brand>
-        <div className="flex md:order-2">
-          {
-            user?<Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-              />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">
-                name@flowbite.com
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>:<div className="flex gap-5">
-            <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Login</button>
-            <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Registration</button>
+    <div className="bg-teal-900  w-full top-0 z-50 text-white">
+      <div className="navbar w-11/12 mx-auto max-[1600px]">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a>Item 1</a>
+              </li>
+              <li>
+                <a>Parent</a>
+                <ul className="p-2">
+                  <li>
+                    <a>Submenu 1</a>
+                  </li>
+                  <li>
+                    <a>Submenu 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a>Item 3</a>
+              </li>
+            </ul>
           </div>
-          }
-          <Navbar.Toggle />
+          <a className=" uppercase text-xl"> Staf<span className="text-secondary text-3xl font-extrabold italic">fM</span>ate</a>
         </div>
-        <Navbar.Collapse>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1 space-x-7">
           <NavLink to="/" className="text-white text-lg">
             Home
           </NavLink>
@@ -60,8 +69,20 @@ const Nav = () => {
           <NavLink to="/contact" className="text-white text-lg">
             Contact
           </NavLink>
-        </Navbar.Collapse>
-      </Navbar>
+          </ul>
+        </div>
+        <div className="navbar-end">
+          {
+            user?'':<div className="flex gap-5">
+            <NavLink to="/login">
+              <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Login</button>
+            </NavLink>
+            <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">Registration</button>
+          </div>
+          }
+          
+        </div>
+      </div>
     </div>
   );
 };

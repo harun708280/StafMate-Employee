@@ -18,6 +18,6 @@ export default {
   },
   plugins: [
     require('flowbite/plugin'),
-   
+    require('daisyui'), // DaisyUI plugin
   ],
 };

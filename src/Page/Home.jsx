@@ -5,7 +5,7 @@ import Banner from '../Component/Banner';
 
 const Home = () => {
     return (
-        <div className='bg-teal-900 border-b rounded-b-[100px]  '>
+        <div className='bg-teal-900 border-b-4 rounded-b-[100px]   '>
 
             <Banner></Banner>
            
