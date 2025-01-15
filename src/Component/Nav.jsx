@@ -78,7 +78,7 @@ const Nav = () => {
               About
             </NavLink>
             
-            <NavLink to="/pricing" className="text-white text-lg">
+            <NavLink to="/dashboard" className="text-white text-lg">
              Go to DashBoard
             </NavLink>
             <NavLink to="/contact" className="text-white text-lg">

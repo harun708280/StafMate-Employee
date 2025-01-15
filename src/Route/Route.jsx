@@ -4,6 +4,7 @@ import Home from "../Page/Home";
 import LayOut from "../Layout/LayOut";
 import Login from "../Page/Login";
 import RegistrationForm from "../Page/RegistrationForm";
+import DashLyout from "../Layout/DashLyout";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         }
       ]
     },
+    {
+      path:'/dashboard',
+      element:<DashLyout></DashLyout>
+    }
   ]);
 
 export default router
