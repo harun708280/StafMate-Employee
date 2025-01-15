@@ -12,7 +12,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="flex items-center gap-12 max-w-[1600px] py-12 mx-auto w-11/12 h-[70vh]">
+    <div className="flex items-center gap-12 max-w-[1600px] py-12 mx-auto w-11/12 ">
       <div className="w-1/2 space-y-4 ">
         <h1 className="text-5xl text-white font-extrabold" >Efficient HR Solutions for Your Business Growth.</h1>
         <p className="text-lg text-white">

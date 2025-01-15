@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const RegistrationForm = () => {
   const [photoUrl, setPhotoUrl] = useState(null); // State to hold the uploaded photo URL
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const handlePhotoUpload = async (event, setFieldValue) => {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -49,46 +49,37 @@ const RegistrationForm = () => {
     designation: Yup.string().required("Designation is required"),
     salary: Yup.number().required("Salary is required"),
     bank_account_no: Yup.string().required("Bank Account Number is required"),
-    photo: Yup.string().url("Invalid image URL"), 
+    photo: Yup.string().url("Invalid image URL"),
   });
-  
-  const publicAxios=usePublic()
-  const {user,CreateAccount,update,setIsLoading,isLoading}=useAuth()
+
+  const publicAxios = usePublic();
+  const { user, CreateAccount, update, setIsLoading, isLoading } = useAuth();
   console.log(user);
-  
-  
-  
-  
+
   const handleSubmit = async (values) => {
     try {
       console.log("Form Values:", values, "Photo URL:", photoUrl);
-  
+
       // Create the user with email and password
       const result = await CreateAccount(values.email, values.password);
       console.log("Account Created:", result);
-  
+
       // Update the user's name and photo
       await update(values.name, photoUrl);
       console.log("User Updated");
-  
+
       // Send user data to the server
       const response = await publicAxios.post("/user", values);
       console.log("User data posted to the server:", response.data);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       console.error("Error during registration:", error);
-    }
-    finally{
-
+    } finally {
       if (!isLoading) {
-        navigate('/')
+        navigate("/");
       }
-
     }
   };
-  
-  
-  
 
   return (
     <div className="flex justify-center items-center mt-12">
@@ -110,7 +101,7 @@ const RegistrationForm = () => {
             designation: "",
             salary: "",
             bank_account_no: "",
-            photo: "", 
+            photo: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -159,11 +150,16 @@ const RegistrationForm = () => {
                   Role
                 </label>
                 <Field
-                  type="text"
+                  as="select" // Select dropdown
                   id="role"
                   name="role"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                />
+                >
+                  <option value="Employee">Employee</option>{" "}
+                  {/* Default value */}
+                 
+                  <option value="HR">HR</option>
+                </Field>
                 <ErrorMessage
                   name="role"
                   component="div"

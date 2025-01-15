@@ -6,10 +6,11 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../Hook/useAuth";
 import usePublic from "../Hook/usePublic";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const navigate=useNavigate()
-  const { LoginGoogle } = useAuth();
+  const { LoginGoogle,Login } = useAuth();
   const publicAxios=usePublic()
   const handleGoogle = () => {
     LoginGoogle().then(async (result) => {
@@ -47,6 +48,11 @@ const Login = () => {
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     console.log("Form Data", values);
+    Login(values.email,values.password)
+    .then(result=>{
+      navigate('/')
+      toast.success('successfully logon')
+    })
     setSubmitting(false);
     resetForm();
   };
