@@ -4,14 +4,15 @@ import useSecure from "../Hook/useSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { format } from "date-fns";
-import TaskUpdateMOdal from "./TaskUpdateMOdal";
+
 import { useState } from "react";
 const TABLE_HEAD = ["Task", "Hours Worked", "Time", "Date", "Actions"];
 import { Button, Modal, Select } from "flowbite-react";
+import DatePicker from "react-datepicker";
 const ProjectTable = () => {
   const [tasks, refetch] = useTask();
   const secureAxios = useSecure();
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -48,12 +49,47 @@ const ProjectTable = () => {
   const [task, setTask] = useState("");
   const [hours, setHours] = useState("");
   const [date, setDate] = useState("");
+  const [project, setProject] = useState("");
+  const [id, setId] = useState();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Call the handleUpdate function passed as a prop to update the task
-    handleUpdate({ task, hours, date });
-    setOpenModal(false); // Close the modal after submitting the form
+    
+    const updateData={
+      task,hours,date,project,id
+    }
+    const {data}=await secureAxios.patch(`/task-update`,updateData)
+    if (data.modifiedCount>0) {
+
+      refetch()
+
+      Swal.fire({
+        title: "Good job!",
+        text: "Update Your Task!",
+        icon: "success",
+        confirmButtonColor: "#134E4A"
+      });
+
+      setOpenModal(false)
+    }
+    else{
+      toast.error('Not Change Please cancel')
+    }
+    
+    
+    
+    
+  };
+
+  const [upData, setUpData] = useState("");
+
+  const handleUPdateTask = async (id) => {
+    const { data } = await secureAxios.get(`/task/${id}`);
+    setTask(data.task);
+    setHours(data.hours);
+    setDate(data.date);
+    setProject(data.url);
+    setId(data._id)
   };
 
   return (
@@ -117,7 +153,9 @@ const ProjectTable = () => {
                   <td className={rowClass}>
                     <div className="flex gap-2">
                       <button
-                        onClick={() => setOpenModal(true)}
+                        onClick={() => {
+                          setOpenModal(true), handleUPdateTask(item._id);
+                        }}
                         className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded shadow"
                       >
                         Edit
@@ -153,18 +191,22 @@ const ProjectTable = () => {
           <Modal.Header>Edit Task</Modal.Header>
           <Modal.Body>
             <form onSubmit={handleSubmit} className="space-y-6 p-6">
-              <div className="mb-4">
-                <label htmlFor="task" className="text-sm font-medium">
-                  Task Name
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Tasks
                 </label>
-                <input
-                  type="text"
-                  id="task"
+                <select
                   value={task}
                   onChange={(e) => setTask(e.target.value)}
-                  className="w-full p-2 mt-2 border border-gray-300 rounded-md"
-                  placeholder="Enter task name"
-                />
+                  className="border border-gray-300 w-full rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  <option value="">Select Task</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Support">Support</option>
+                  <option value="Content">Content</option>
+                  <option value="Paper-work">Paper-work</option>
+                </select>
               </div>
               <div className="mb-4">
                 <label htmlFor="hours" className="text-sm font-medium">
@@ -174,7 +216,7 @@ const ProjectTable = () => {
                   type="number"
                   id="hours"
                   value={hours}
-                  onChange={(e) => setHours(e.target.value)}
+                  onChange={(e) => setHours(Math.floor(e.target.value))}
                   className="w-full p-2 mt-2 border border-gray-300 rounded-md"
                   placeholder="Enter hours worked"
                 />
@@ -183,12 +225,25 @@ const ProjectTable = () => {
                 <label htmlFor="date" className="text-sm font-medium">
                   Date
                 </label>
+                <DatePicker
+                  selected={date}
+                  onChange={(selectedDate) => setDate(selectedDate)}
+                  className="border   w-[560px]  rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Project Link
+                </label>
                 <input
-                  type="date"
-                  id="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="w-full p-2 mt-2 border border-gray-300 rounded-md"
+                  type="url"
+                  name="url"
+                  value={project}
+                  onChange={(e) => setProject(e.target.value)}
+                  className="border  w-[560px] rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter Project url"
+                  required
                 />
               </div>
             </form>
@@ -197,7 +252,7 @@ const ProjectTable = () => {
             <Button type="submit" onClick={handleSubmit} className="bg-primary">
               Save Changes
             </Button>
-            <Button color="gray" onClick={() => setOpenModal(false)}>
+            <Button color="bg-sec" className="bg-secondary text-white" onClick={() => setOpenModal(false)}>
               Cancel
             </Button>
           </Modal.Footer>
