@@ -4,15 +4,16 @@ import * as Yup from "yup";
 import axios from "axios";
 import { FaUserPlus } from "react-icons/fa";
 import { Spinner } from "flowbite-react";
-import FadeLoader from "react-spinners/FadeLoader";
 import usePublic from "../Hook/usePublic";
 import useAuth from "../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [photoUrl, setPhotoUrl] = useState(null); // State to hold the uploaded photo URL
-
   const navigate = useNavigate();
+  const publicAxios = usePublic();
+  const { CreateAccount, update, setIsLoading, isLoading } = useAuth();
+
   const handlePhotoUpload = async (event, setFieldValue) => {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -23,8 +24,9 @@ const RegistrationForm = () => {
         `https://api.imgbb.com/1/upload?key=2a9bcf84d4334dcac7a2729bb6336536`,
         formData
       );
-      setPhotoUrl(response.data.data.url); // Set the uploaded photo URL
-      setFieldValue("photo", response.data.data.url); // Update Formik with the photo URL
+      const imageUrl = response.data.data.url; // Extract uploaded image URL
+      setPhotoUrl(imageUrl); // Update local state with photo URL
+      setFieldValue("photo", imageUrl); // Update Formik with the photo URL
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -44,21 +46,17 @@ const RegistrationForm = () => {
         "Password must contain a special character"
       )
       .required("Password is required"),
-
     role: Yup.string().required("Role is required"),
     designation: Yup.string().required("Designation is required"),
     salary: Yup.number().required("Salary is required"),
     bank_account_no: Yup.string().required("Bank Account Number is required"),
-    photo: Yup.string().url("Invalid image URL"),
+    photo: Yup.string().url("Invalid image URL").required("Photo is required"),
   });
-
-  const publicAxios = usePublic();
-  const { user, CreateAccount, update, setIsLoading, isLoading } = useAuth();
-  console.log(user);
 
   const handleSubmit = async (values) => {
     try {
-      console.log("Form Values:", values, "Photo URL:", photoUrl);
+      setIsLoading(true);
+      console.log("Form Values:", values);
 
       // Create the user with email and password
       const result = await CreateAccount(values.email, values.password);
@@ -69,15 +67,19 @@ const RegistrationForm = () => {
       console.log("User Updated");
 
       // Send user data to the server
-      const response = await publicAxios.post("/user", values);
+      const response = await publicAxios.post("/user", {
+        ...values,
+        photo: photoUrl, // Ensure the photo URL is passed explicitly
+      });
       console.log("User data posted to the server:", response.data);
       setIsLoading(false);
+
+      // Navigate after successful registration
+      navigate("/");
     } catch (error) {
       console.error("Error during registration:", error);
     } finally {
-      if (!isLoading) {
-        navigate("/");
-      }
+      setIsLoading(false);
     }
   };
 
@@ -97,7 +99,8 @@ const RegistrationForm = () => {
             name: "",
             email: "",
             password: "",
-            role: "",
+            role: "Employee",
+            status:false, 
             designation: "",
             salary: "",
             bank_account_no: "",
@@ -150,14 +153,12 @@ const RegistrationForm = () => {
                   Role
                 </label>
                 <Field
-                  as="select" // Select dropdown
+                  as="select"
                   id="role"
                   name="role"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
-                  <option value="Employee">Employee</option>{" "}
-                  {/* Default value */}
-                 
+                  <option value="Employee">Employee</option>
                   <option value="HR">HR</option>
                 </Field>
                 <ErrorMessage
@@ -234,8 +235,8 @@ const RegistrationForm = () => {
                   id="photo"
                   name="photo"
                   accept="image/*"
-                  onChange={(e) => handlePhotoUpload(e, setFieldValue)} // Update Formik's photo field
-                  className="w-full px-4  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  onChange={(e) => handlePhotoUpload(e, setFieldValue)}
+                  className="w-full px-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
                 <ErrorMessage
                   name="photo"
@@ -269,12 +270,7 @@ const RegistrationForm = () => {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    <div className="flex justify-center">
-                      <Spinner
-                        color="purple"
-                        aria-label="Purple spinner example"
-                      />
-                    </div>
+                    <Spinner color="purple" aria-label="Loading spinner" />
                   ) : (
                     "Register"
                   )}

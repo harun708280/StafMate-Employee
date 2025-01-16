@@ -2,12 +2,13 @@ import React from "react";
 import { Badge } from "flowbite-react";
 import { AiFillCode } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaProjectDiagram, FaTasks } from "react-icons/fa";
+import { FaHome, FaProjectDiagram, FaRegListAlt, FaTasks } from "react-icons/fa";
 import { MdOutlinePayments } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import useUserRole from "../Hook/useUserRole";
+import { GiProgression, GiTeamDowngrade } from "react-icons/gi";
 const DashNav = () => {
 
   const [role]=useUserRole()
@@ -30,7 +31,8 @@ const DashNav = () => {
       
       </div>
       <div className="flex flex-col justify-between min-h-[80vh]">
-      <div className="mt-10 text-gray-200 text-sm">
+       {
+        role==='Employee' && <div className="mt-10 text-gray-200 text-sm">
         <p>Platform</p>
         <hr className="my-3" />
 
@@ -41,6 +43,21 @@ const DashNav = () => {
         <NavLink to='/' className='flex gap-3 items-center text-lg font-semibold mb-4'> <FaHome />  Home</NavLink>
 
       </div>
+       }
+       {
+        role ==='HR' && <div className="mt-10 text-gray-200 text-sm">
+        <p>Platform</p>
+        <hr className="my-3" />
+
+        <NavLink to='/hrDashboard' className='flex gap-3 items-center text-lg font-semibold mb-4'><FaRegListAlt /> Employee List</NavLink>
+        
+        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'> <GiProgression /> Progress</NavLink>
+        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><GiTeamDowngrade /> HR Team</NavLink>
+        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><MdOutlinePayments />Payment</NavLink>
+        <NavLink to='/' className='flex gap-3 items-center text-lg font-semibold mb-4'> <FaHome />  Home</NavLink>
+
+      </div>
+       }
       <div className="">
         <NavLink className='flex gap-3 items-center text-lg font-semibold mb-2'> <CgProfile /> Profile</NavLink>
         <NavLink className='flex gap-3 items-center text-lg font-semibold mb-2' > <CiSettings />  Setting</NavLink>

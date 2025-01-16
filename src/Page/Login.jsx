@@ -18,6 +18,7 @@ const Login = () => {
         name: result?.user?.displayName,
         email: result?.user?.email,
         role: "Employee",
+        status:false, 
 
         designation:'Sales Assistant',
         salary:20000,

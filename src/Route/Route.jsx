@@ -7,6 +7,8 @@ import RegistrationForm from "../Page/RegistrationForm";
 import DashLyout from "../Layout/DashLyout";
 import Overview from "../Empolye/Overview";
 import WorkSheetForm from "../Empolye/WorkSheetForm";
+import HrOverview from "../HR/HrOverview";
+import HrLayout from "../Layout/HrLayout";
 
 const router = createBrowserRouter([
     {
@@ -38,8 +40,24 @@ const router = createBrowserRouter([
         {
           path:'/dashboard/work-sheet',
           element:<WorkSheetForm></WorkSheetForm>
+        },
+        {
+          path:'/dashboard/hrOverview',
+          element:<HrOverview></HrOverview>
+
         }
         
+      ]
+    },{
+      path:'/hrDashboard',
+      element:<HrLayout></HrLayout>,
+      children:[
+        {
+          path:'/hrDashboard',
+          element:<HrOverview></HrOverview>
+        },{
+          
+        }
       ]
     }
   ]);

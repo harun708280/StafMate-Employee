@@ -3,18 +3,19 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { NavLink } from "react-router-dom";
 import { UserAuthContext } from "../Authentication/Authentication";
 import toast from "react-hot-toast";
+import useUserRole from "../Hook/useUserRole";
 
 const Nav = () => {
-  const { user,Logout } = useContext(UserAuthContext);
+  const { user, Logout } = useContext(UserAuthContext);
 
-  const handleLogout=()=>{
-    Logout()
-    .then(result=>{
-      toast.success('successfully logout')
-    })
-  }
-  
-  
+  const handleLogout = () => {
+    Logout().then((result) => {
+      toast.success("successfully logout");
+    });
+  };
+
+  const [role] = useUserRole();
+  console.log(role);
 
   return (
     <div className="bg-teal-900  w-full top-0 z-50 text-white">
@@ -77,10 +78,22 @@ const Nav = () => {
             <NavLink to="/about" className="text-white text-lg">
               About
             </NavLink>
-            
-            <NavLink to="/dashboard" className="text-white text-lg">
-             Go to DashBoard
+
+            <NavLink
+              to={
+                role === "Employee"
+                  ? "/dashboard"
+                  : role === "HR"
+                  ? "/hrDashboard"
+                  : role === "Admin"
+                  ? "/adminDashboard"
+                  : "/" 
+              }
+              className="text-white text-lg"
+            >
+              Go to DashBoard
             </NavLink>
+
             <NavLink to="/contact" className="text-white text-lg">
               Contact
             </NavLink>
@@ -89,14 +102,20 @@ const Nav = () => {
         <div className="navbar-end">
           {user ? (
             <div className="flex gap-3">
-              <img className="h-10 w-10 rounded-full border"
+              <img
+                className="h-10 w-10 rounded-full border"
                 src={
                   user?.photoURL ||
                   "https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg"
                 }
                 alt="User"
               />
-              <button onClick={handleLogout} className="bg-secondary px-4 rounded-lg text-lg font-semibold">Logout</button>
+              <button
+                onClick={handleLogout}
+                className="bg-secondary px-4 rounded-lg text-lg font-semibold"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div className="flex gap-5">
@@ -105,9 +124,11 @@ const Nav = () => {
                   Login
                 </button>
               </NavLink>
-              <NavLink to='/register'><button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
-                Registration
-              </button></NavLink>
+              <NavLink to="/register">
+                <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
+                  Registration
+                </button>
+              </NavLink>
             </div>
           )}
         </div>
