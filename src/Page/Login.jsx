@@ -24,10 +24,11 @@ const Login = () => {
         bank_account_no:4242424242424242,
         photo:result?.user?.photoURL
       };
+      navigate('/')
       const {data}=await publicAxios.post('/user',dataUser)
       
       
-      navigate('/')
+      
       
       
     });

@@ -1,16 +1,35 @@
-import axios from 'axios';
-import React from 'react';
+import axios from "axios";
+import React, { useEffect } from "react";
+import useAuth from "./useAuth";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+const instance = axios.create({
+  baseURL: "http://localhost:9000",
+  withCredentials: true,
+});
 
-
-const instance=axios.create({
-    baseURL:''
-})
 const useSecure = () => {
-    return (
-        <div>
+  const { Logout } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    instance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.status === 401 || error.status === 403) {
+          toast.dismiss();
+          toast.error(error.response.data.message);
+
+          Logout().then((result) => {
             
-        </div>
+          });
+        }
+        return Promise.reject(error);
+      }
     );
+  }, []);
+  return instance
 };
 
 export default useSecure;
