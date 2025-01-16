@@ -7,10 +7,16 @@ import { MdOutlinePayments } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
+import useUserRole from "../Hook/useUserRole";
 const DashNav = () => {
+
+  const [role]=useUserRole()
+  console.log(role);
+  
+  
   return (
     <div className="text-white w-[300px] min-h-svh bg-primary border-r border-primary p-8 bg-opacity-20">
-      <div className="flex space-x-6">
+      <div className="flex items-center space-x-6">
       <h1 className="text-2xl font-bold">
         Staf
         <span className="text-secondary text-3xl font-extrabold italic">
@@ -18,6 +24,7 @@ const DashNav = () => {
         </span>
         ate
       </h1>
+      <p>{role}</p>
 
 
       

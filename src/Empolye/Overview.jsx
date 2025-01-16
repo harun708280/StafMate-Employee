@@ -6,20 +6,40 @@ import ProjectTable from "./ProjectTable";
 import { Button, Modal } from "flowbite-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "../Hook/useAuth";
+import useSecure from "../Hook/useSecure";
+import toast from "react-hot-toast";
 
 const Overview = () => {
   const [task, setTask] = useState("");
-  const [hours, setHours] = useState("");
+  const [hours, setHours] = useState();
   const [date, setDate] = useState(new Date());
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  
+  const {user}=useAuth()
+  const secureAxios=useSecure()
+  const email=user?.email
+  const EmployeeName=user?.displayName
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const url=e.target.url.value
-    const formData = { task, hours, date,url };
-    console.log("Form Data Submitted: ", formData);
-    // Add logic to save data to the database here
-    setIsModalOpen(false); // Close modal after submission
+    const formData = { task, hours, date,url,email,EmployeeName };
+    try{ 
+      const {data}=await secureAxios.post(`/submit-task`,formData)
+      setIsModalOpen(false);
+      
+      e.target.reset()
+
+    }
+    catch{
+      toast.error('something went wrong')
+    }
+    
+    
+
+    
+   
   };
 
   return (
@@ -50,9 +70,9 @@ const Overview = () => {
       <div className="flex justify-end my-6">
         <button
           onClick={() => setIsModalOpen(true)} // Correct state function
-          className="py-2 px-4 bg-secondary rounded-lg flex items-center gap-2"
+          className="py-2 px-4 uppercase font-bold bg-secondary rounded-lg flex items-center gap-2"
         >
-          <IoMdAdd /> Add Task
+          <IoMdAdd /> Submit Task
         </button>
       </div>
 
@@ -90,7 +110,7 @@ const Overview = () => {
               <input
                 type="number"
                 value={hours}
-                onChange={(e) => setHours(e.target.value)}
+                onChange={(e) => setHours(Math.floor(e.target.value))} 
                 className="border  w-[560px] rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter hours"
                 required
