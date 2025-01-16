@@ -10,6 +10,7 @@ import useAuth from "../Hook/useAuth";
 import useSecure from "../Hook/useSecure";
 import toast from "react-hot-toast";
 import Swal from 'sweetalert2'
+import useTask from "../Hook/useTask";
 
 const Overview = () => {
   const [task, setTask] = useState("");
@@ -21,6 +22,7 @@ const Overview = () => {
   const secureAxios=useSecure()
   const email=user?.email
   const EmployeeName=user?.displayName
+  const [,refetch]=useTask()
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -35,8 +37,10 @@ const Overview = () => {
         icon: "success",
         confirmButtonColor: "#134E4A" 
       });
+
+      refetch()
       
-      setTask("");
+    setTask("");
     setHours("");
     setDate(new Date());
 

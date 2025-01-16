@@ -1,10 +1,51 @@
 import { Card, Typography } from "@material-tailwind/react";
 import useTask from "../Hook/useTask";
+import useSecure from "../Hook/useSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const TABLE_HEAD = ["Task", "Hours Worked", "Date", "Actions"];
 
 const ProjectTable = () => {
-  const [tasks] = useTask();
+  const [tasks,refetch] = useTask();
+  const secureAxios=useSecure()
+
+  const handleDelete=(id)=>{
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try{
+          const {data}=await secureAxios.delete(`/employee-task-delete/${id}`)
+          console.log(data);
+          if (data.deletedCount) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your task has been deleted.",
+              icon: "success",
+              confirmButtonColor: "#134E4A"
+            });
+            refetch()
+          }
+
+
+
+        }catch (er) {
+         toast.error('something went wrong')
+        }
+      }
+    });
+    
+    
+  }
 
   return (
     <div className="p-4">
@@ -64,7 +105,7 @@ const ProjectTable = () => {
                       <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded shadow">
                         Edit
                       </button>
-                      <button className="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1 rounded shadow">
+                      <button onClick={()=>handleDelete(item._id)} className="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1 rounded shadow">
                         Delete
                       </button>
                     </div>
