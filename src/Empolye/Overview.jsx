@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../Hook/useAuth";
 import useSecure from "../Hook/useSecure";
 import toast from "react-hot-toast";
+import Swal from 'sweetalert2'
 
 const Overview = () => {
   const [task, setTask] = useState("");
@@ -28,8 +29,19 @@ const Overview = () => {
     try{ 
       const {data}=await secureAxios.post(`/submit-task`,formData)
       setIsModalOpen(false);
+      Swal.fire({
+        title: "Good job!",
+        text: "Your task successfully submitted!",
+        icon: "success",
+        confirmButtonColor: "#134E4A" 
+      });
       
-      e.target.reset()
+      setTask("");
+    setHours("");
+    setDate(new Date());
+
+    
+    e.target.reset();
 
     }
     catch{
