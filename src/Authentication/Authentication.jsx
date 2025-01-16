@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import React, { createContext, useEffect, useState } from "react";
 import auth from "./init";
 // import auth from "./init";
-// import axios from 'axios';
+import axios from 'axios';
 
 
 export const UserAuthContext = createContext(null);
@@ -13,44 +13,45 @@ const Authentication = ({ children }) => {
     const [user,setUser]=useState(null)
     const [isLoading,setIsLoading]=useState(true)
     
-    useEffect(()=>{
-        const unsubscribe=onAuthStateChanged(auth,(currentUser)=>{
-            setUser(currentUser)
-            // if (currentUser?.email) {
-            //     const user={email:currentUser.email}
-            //     console.log(user);
-                
-            //     // axios.post(`http://localhost:9000/jwt`,user)
-            //     // .then(res=>console.log(res.data)
-            //     // )
-
-            //     axios.post(`${import.meta.env.VITE_API}/jwt`, user, {
-            //         withCredentials: true,
-            //     })
-            //     .then(res =>{ console.log(res.data); setIsLoading(false)})
-            //     .catch(err => {console.error(err) });
-                
-                
-            // }
-            // else{
-            //     axios.post('/logout',{},{
-            //         withCredentials:true
-            //     })
-            //     .then(res=>{console.log('logout',res.data);
-            //         setIsLoading(false)
-
-
-            //     })
-            // }
-            setIsLoading(false)
-        })
-
-        return ()=>{
-            unsubscribe()
-        }
-
-
-    },[])
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+          setUser(currentUser);
+      
+          if (currentUser?.email) {
+            const user = { email: currentUser.email };
+            console.log(user);
+      
+            axios.post(`${import.meta.env.VITE_API}/jwt`, user, {
+              withCredentials: true,
+            })
+              .then(res => {
+                console.log(res.data);
+                setIsLoading(false);
+              })
+              .catch(err => {
+                console.error(err);
+                setIsLoading(false);
+              });
+          } else {
+            axios.post(`${import.meta.env.VITE_API}/logout`, {}, {
+              withCredentials: true,
+            })
+              .then(res => {
+                console.log('logout', res.data);
+                setIsLoading(false);
+              })
+              .catch(err => {
+                console.error(err);
+                setIsLoading(false);
+              });
+          }
+        });
+      
+        return () => {
+          unsubscribe();
+        };
+      }, []);
+      
 
     const CreateAccount=(email,password)=>{
         setIsLoading(true)
