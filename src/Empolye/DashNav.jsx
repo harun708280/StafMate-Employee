@@ -49,7 +49,7 @@ const DashNav = () => {
         <p>Platform</p>
         <hr className="my-3" />
 
-        <NavLink to='/hrDashboard' className='flex gap-3 items-center text-lg font-semibold mb-4'><FaRegListAlt /> Employee List</NavLink>
+        <NavLink to='/hrDashboard' className='flex gap-3 items-center text-lg font-semibold mb-4'><FaRegListAlt /> Employee Task</NavLink>
         
         <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'> <GiProgression /> Progress</NavLink>
         <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><GiTeamDowngrade /> HR Team</NavLink>

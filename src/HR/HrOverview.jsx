@@ -2,6 +2,7 @@ import React from 'react';
 import HrOverviewCard from './HrOverviewCard';
 import { IoMdPrint } from 'react-icons/io';
 import { CiExport } from 'react-icons/ci';
+import TaskListTable from './TaskListTable';
 
 const HrOverview = () => {
     return (
@@ -24,6 +25,7 @@ const HrOverview = () => {
                     </div>
                   </div>
             <HrOverviewCard></HrOverviewCard>
+            <TaskListTable></TaskListTable>
         </div>
     );
 };
