@@ -12,6 +12,8 @@ import HrLayout from "../Layout/HrLayout";
 import Details from "../HR/Details";
 import HrDetails from "../HR/HrDetails";
 import Progress from "../HR/Progress";
+import AdminLayOut from "../Layout/AdminLayOut";
+import AdminOverView from "../Admin/AdminOverView";
 
 const router = createBrowserRouter([
     {
@@ -51,7 +53,8 @@ const router = createBrowserRouter([
         }
         
       ]
-    },{
+    }
+    ,{
       path:'/hrDashboard',
       element:<HrLayout></HrLayout>,
       children:[
@@ -64,6 +67,16 @@ const router = createBrowserRouter([
         },{
           path:'/hrDashboard/progress',
           element:<Progress></Progress>
+        }
+      ]
+    },
+    {
+      path:'/adminDashboard',
+      element:<AdminLayOut></AdminLayOut>,
+      children:[
+        {
+          path:'/adminDashboard',
+          element:<AdminOverView></AdminOverView>
         }
       ]
     }

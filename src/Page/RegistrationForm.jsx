@@ -7,12 +7,14 @@ import { Spinner } from "flowbite-react";
 import usePublic from "../Hook/usePublic";
 import useAuth from "../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
+import useUserRole from "../Hook/useUserRole";
 
 const RegistrationForm = () => {
   const [photoUrl, setPhotoUrl] = useState(null); // State to hold the uploaded photo URL
   const navigate = useNavigate();
   const publicAxios = usePublic();
   const { CreateAccount, update, setIsLoading, isLoading } = useAuth();
+  const [,refetch]=useUserRole()
 
   const handlePhotoUpload = async (event, setFieldValue) => {
     const file = event.target.files[0];
@@ -75,11 +77,13 @@ const RegistrationForm = () => {
       setIsLoading(false);
 
       // Navigate after successful registration
+      refetch()
       navigate("/");
     } catch (error) {
       console.error("Error during registration:", error);
     } finally {
       setIsLoading(false);
+      refetch()
     }
   };
 
