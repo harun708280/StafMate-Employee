@@ -100,7 +100,7 @@ const RegistrationForm = () => {
             email: "",
             password: "",
             role: "Employee",
-            status:false, 
+            status:'false', 
             designation: "",
             salary: "",
             bank_account_no: "",

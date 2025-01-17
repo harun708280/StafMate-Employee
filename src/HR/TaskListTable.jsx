@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useTaskList from "../Hook/useTaskList";
 import useEmployee from "../Hook/useEmpolye";
 
@@ -7,12 +7,47 @@ import { button, Card, Typography } from "@material-tailwind/react";
 import { format } from "date-fns";
 import { MdVerifiedUser } from "react-icons/md";
 const TABLE_HEAD = ["Name", "Email", "Verified", "Bank Acc", "Salary", "Pay"];
-import verified from "/good-person_12112591.png";
+import verified from "/verfied.png";
 import unverified from "/unverifiye.png";
 import { FaRegPaperPlane } from "react-icons/fa";
+import useSecure from "../Hook/useSecure";
+import Swal from "sweetalert2";
 const TaskListTable = () => {
   const [employees, refetch] = useEmployee();
-  console.log(employees);
+
+  const [verifieds, setVerified] = useState();
+
+  const secureAxios = useSecure();
+
+  const handleveifyed = async (id) => {
+    const { data } = await secureAxios.patch(
+      `/employee-verify/${id}?status=${true}`
+    );
+    refetch();
+    if (data.modifiedCount) {
+      Swal.fire({
+        title: "Good job!",
+        text: "Success fully this employee verified!",
+        icon: "success",
+        confirmButtonColor:'#134E4A'
+      });
+    }
+  };
+
+  const handleUnverified = async (id) => {
+    const { data } = await secureAxios.patch(
+      `/employee-verify/${id}?status=${false}`
+    );
+    refetch();
+    if (data.modifiedCount) {
+      Swal.fire({
+        title: "Good job!",
+        text: "Success fully this employee unverified!",
+        icon: "success",
+        confirmButtonColor:'#134E4A'
+      });
+    }
+  };
 
   return (
     <div>
@@ -62,13 +97,18 @@ const TaskListTable = () => {
                   {/* Date Column */}
                   <td className={rowClass}>
                     <Typography variant="small" className="font-normal">
-                      {item.status ? (
-                        <button>
-                          <img className="h-9" src={verified} alt="" />
+                      {item.status==='true' ? (
+                        <button onClick={()=>handleUnverified(item._id)} >
+                          <img className="h-7" src={verified} alt="" />
                         </button>
                       ) : (
                         <button>
-                          <img className="h-10" src={unverified} alt="" />
+                          <img
+                            onClick={() => handleveifyed(item._id)}
+                            className="h-7"
+                            src={unverified}
+                            alt=""
+                          />
                         </button>
                       )}
                     </Typography>
@@ -87,8 +127,8 @@ const TaskListTable = () => {
                   {/* Actions Column */}
                   <td className={rowClass}>
                     <div className="flex gap-2">
-                      <button className="bg-secondary flex gap-2 hover:bg-secondary text-white text-sm px-3 py-1 rounded shadow">
-                      <FaRegPaperPlane />  Payment Request
+                      <button disabled={item.status==='false'} className="bg-secondary flex gap-2 hover:bg-secondary text-white text-sm px-3 py-1 rounded shadow">
+                        <FaRegPaperPlane /> Payment Request
                       </button>
                     </div>
                   </td>
