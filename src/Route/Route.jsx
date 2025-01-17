@@ -9,6 +9,8 @@ import Overview from "../Empolye/Overview";
 import WorkSheetForm from "../Empolye/WorkSheetForm";
 import HrOverview from "../HR/HrOverview";
 import HrLayout from "../Layout/HrLayout";
+import Details from "../HR/Details";
+import HrDetails from "../HR/HrDetails";
 
 const router = createBrowserRouter([
     {
@@ -56,7 +58,8 @@ const router = createBrowserRouter([
           path:'/hrDashboard',
           element:<HrOverview></HrOverview>
         },{
-          
+          path:'/hrDashboard/details/:id',
+          element:<HrDetails></HrDetails>
         }
       ]
     }

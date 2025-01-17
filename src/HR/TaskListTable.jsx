@@ -14,6 +14,7 @@ import useSecure from "../Hook/useSecure";
 import Swal from "sweetalert2";
 import { TbListDetails } from "react-icons/tb";
 import PayModal from "./PayModal";
+import { NavLink } from "react-router-dom";
 const TaskListTable = () => {
   const [employees, refetch] = useEmployee();
   const [openModal, setOpenModal] = useState(false);
@@ -145,7 +146,7 @@ const TaskListTable = () => {
                   </td>
                   <td className={rowClass}>
                     <Typography variant="small" className="font-normal">
-                      <button className="bg-secondary flex gap-2 hover:bg-secondary text-white items-center text-sm px-3 py-1 rounded shadow"><TbListDetails /> Details</button>
+                      <NavLink to={`/hrDashboard/details/${item?._id}`}><button className="bg-secondary flex gap-2 hover:bg-secondary text-white items-center text-sm px-3 py-1 rounded shadow"><TbListDetails /> Details</button></NavLink>
                     </Typography>
                   </td>
                 </tr>

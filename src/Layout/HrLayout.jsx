@@ -7,7 +7,7 @@ const HrLayout = () => {
         <div>
             <div className='bg-[#020a13] min-h-svh flex gap-12 text-white'>
             <DashNav></DashNav>
-            <div className="max-w-[1600px] mx-auto">
+            <div className="w-full">
             <Outlet></Outlet>
             </div>
         </div>
