@@ -4,6 +4,7 @@ import { IoMdPrint } from 'react-icons/io';
 import { CiExport } from 'react-icons/ci';
 import TaskListTable from './TaskListTable';
 
+
 const HrOverview = () => {
     return (
         <div className='my-12' >
@@ -11,13 +12,13 @@ const HrOverview = () => {
                     <h1 className="text-3xl font-extrabold">Dashboard HR</h1>
                     <div className="flex gap-6">
                       <button
-                        className="bg-secondary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
+                        className="bg-secondary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
                         aria-label="Export data"
                       >
                         <CiExport /> Export
                       </button>
                       <button
-                        className="bg-secondary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
+                        className="bg-secondary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
                         aria-label="Print data"
                       >
                         <IoMdPrint /> Print
@@ -26,6 +27,13 @@ const HrOverview = () => {
                   </div>
             <HrOverviewCard></HrOverviewCard>
             <TaskListTable></TaskListTable>
+            <div className="">
+                
+
+
+                
+
+            </div>
         </div>
     );
 };

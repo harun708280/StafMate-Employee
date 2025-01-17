@@ -6,16 +6,19 @@ import { Button, Modal, Select } from "flowbite-react";
 import { button, Card, Typography } from "@material-tailwind/react";
 import { format } from "date-fns";
 import { MdVerifiedUser } from "react-icons/md";
-const TABLE_HEAD = ["Name", "Email", "Verified", "Bank Acc", "Salary", "Pay"];
+const TABLE_HEAD = ["Name", "Email", "Verified", "Bank Ac no:", "Salary", "Pay","Action"];
 import verified from "/verfied.png";
 import unverified from "/unverifiye.png";
 import { FaRegPaperPlane } from "react-icons/fa";
 import useSecure from "../Hook/useSecure";
 import Swal from "sweetalert2";
+import { TbListDetails } from "react-icons/tb";
+import PayModal from "./PayModal";
 const TaskListTable = () => {
   const [employees, refetch] = useEmployee();
+  const [openModal, setOpenModal] = useState(false);
 
-  const [verifieds, setVerified] = useState();
+  const [employee, setEmployee] = useState(null);
 
   const secureAxios = useSecure();
 
@@ -49,6 +52,14 @@ const TaskListTable = () => {
     }
   };
 
+  const handleEmployee=async(id)=>{
+    const {data}=await secureAxios.get(`/employee/${id}`)
+    setEmployee(data)
+    
+
+
+  }
+
   return (
     <div>
       <Card className="h-full w-full border bg-[#060d22] text-white shadow-lg rounded-lg">
@@ -78,7 +89,7 @@ const TaskListTable = () => {
               return (
                 <tr
                   key={item.id || index}
-                  className={`hover:bg-primary transition duration-300`}
+                  className={`hover:bg-primary hover:bg-opacity-25 transition duration-300`}
                 >
                   {/* Task Column */}
                   <td className={rowClass}>
@@ -127,10 +138,15 @@ const TaskListTable = () => {
                   {/* Actions Column */}
                   <td className={rowClass}>
                     <div className="flex gap-2">
-                      <button disabled={item.status==='false'} className="bg-secondary flex gap-2 hover:bg-secondary text-white text-sm px-3 py-1 rounded shadow">
+                      <button onClick={() => {setOpenModal(true),handleEmployee(item._id)}} disabled={item.status==='false'} className="bg-primary flex gap-2  text-white text-sm px-3 py-1 rounded shadow">
                         <FaRegPaperPlane /> Payment Request
                       </button>
                     </div>
+                  </td>
+                  <td className={rowClass}>
+                    <Typography variant="small" className="font-normal">
+                      <button className="bg-secondary flex gap-2 hover:bg-secondary text-white items-center text-sm px-3 py-1 rounded shadow"><TbListDetails /> Details</button>
+                    </Typography>
                   </td>
                 </tr>
               );
@@ -141,10 +157,17 @@ const TaskListTable = () => {
         {/* Empty State */}
         {employees.length === 0 && (
           <div className="p-4 text-center text-gray-300">
-            No tasks available. Please add some tasks.
+            No Employee available. Please add some tasks.
           </div>
         )}
       </Card>
+      <div className="">
+
+      <PayModal openModal={openModal} setOpenModal={setOpenModal} employee={employee}  />
+
+       
+        
+      </div>
     </div>
   );
 };
