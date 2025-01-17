@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, TextInput, Label } from "flowbite-react";
-import { Card, Typography } from "@material-tailwind/react";
+import { button, Card, Typography } from "@material-tailwind/react";
 import useEmployeeList from "../Hook/useEmployeeList";
 import ad from "/aa.png";
 import fire from "/logout_14722697.png";
@@ -10,11 +10,13 @@ import { NavLink } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import useSecure from "../Hook/useSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const TABLE_HEAD = [
   "Name",
   "Email",
   "Designation",
+  "Role",
   "Bank Ac no:",
   "Salary",
   "Adjust Salary",
@@ -26,38 +28,86 @@ const TABLE_HEAD = [
 const AllEmployeeList = () => {
   const [employeeLists, refetch] = useEmployeeList();
   const [openModal, setOpenModal] = useState(false);
-  const [adjustedSalary, setAdjustedSalary] = useState('');
-  const [actionEmployee, setActionEmployee] = useState(null); 
+  const [adjustedSalary, setAdjustedSalary] = useState("");
+  const [actionEmployee, setActionEmployee] = useState(null);
   function onCloseModal() {
     setOpenModal(false);
-    setAdjustedSalary(''); 
-    setActionEmployee(null); 
+    setAdjustedSalary("");
+    setActionEmployee(null);
   }
 
-  const secureAxios=useSecure()
+  const secureAxios = useSecure();
 
   const handleAdjustSalary = async (id) => {
     if (actionEmployee?.salary <= adjustedSalary) {
       try {
-        // Sending a PATCH request to update the salary
-        const { data } = await secureAxios.patch(`/all-employee-lists/${id}?money=${adjustedSalary}`);
-        
-        
+        const { data } = await secureAxios.patch(
+          `/all-employee-lists/${id}?money=${adjustedSalary}`
+        );
+
         toast.success(`Salary successfully adjusted to ${adjustedSalary}`);
-        
+
         console.log(`Adjusted salary for employee ${id} to ${adjustedSalary}`);
-        
-        setOpenModal(false); 
-        refetch()
+
+        setOpenModal(false);
+        refetch();
       } catch (error) {
         console.error("Error adjusting salary:", error);
-        toast.error('Failed to adjust salary. Please try again.');
+        toast.error("Failed to adjust salary. Please try again.");
       }
     } else {
-      toast.error('Adjusted salary must be greater than the current salary.');
+      toast.error("Adjusted salary must be greater than the current salary.");
     }
   };
+
+  const handleHr = async (id) => {
+    const { data } = await secureAxios.patch(`/all-employee-lists/${id}?hr=HR`);
+    if (data.modifiedCount > 0) {
+      toast.success(`successfully make 'HR'!`);
+      refetch();
+    }
+  };
+  const handleEmployee = async (id) => {
+    const { data } = await secureAxios.patch(
+      `/all-employee-lists/${id}?hr=Employee`
+    );
+    if (data.modifiedCount > 0) {
+      toast.success("successfully make 'Employee'!");
+
+      refetch();
+    }
+  };
+  const handleFired = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await secureAxios.patch(
+          `/all-employee-lists/${id}?hr=Fired`
+        );
+        if (data.modifiedCount > 0) {
+          
+          Swal.fire({
+            title: "Fired!",
+            text: "Successfully this employee fired.",
+            icon: "success",
+            confirmButtonColor:'#134E4A'
   
+          });
+          refetch();
+
+          
+        }
+        
+      }
+    });
+  };
 
   const handleOpenModal = (employee) => {
     setActionEmployee(employee); // Set the selected employee for actions
@@ -100,6 +150,7 @@ const AllEmployeeList = () => {
                   <td className={rowClass}>{item.name}</td>
                   <td className={rowClass}>{item.email}</td>
                   <td className={rowClass}>{item.designation}</td>
+                  <td className={rowClass}>{item.role}</td>
                   <td className={rowClass}>{item.bank_account_no}</td>
                   <td className={rowClass}>{item.salary}</td>
 
@@ -114,20 +165,24 @@ const AllEmployeeList = () => {
 
                   <td className={rowClass}>
                     <div className="flex gap-2">
-                      <button onClick={() => handleOpenModal(item)}>
-                        <img className="h-9" src={fire} alt="Fire" />
-                      </button>
+                      {item.role === "Fired" ? (
+                        <button disabled className="text-red-700 text-lg font-bold">Fired</button>
+                      ) : (
+                        <button onClick={() => handleFired(item._id)}>
+                          <img className="h-9" src={fire} alt="Fire" />
+                        </button>
+                      )}
                     </div>
                   </td>
 
                   <td className={rowClass}>
                     <div className="flex gap-2">
                       {item.role === "HR" ? (
-                        <button >
+                        <button onClick={() => handleEmployee(item._id)}>
                           <img className="h-9" src={hrs} alt="HR" />
                         </button>
                       ) : (
-                        <button >
+                        <button onClick={() => handleHr(item._id)}>
                           <img className="h-9" src={hr} alt="Make HR" />
                         </button>
                       )}
@@ -143,7 +198,6 @@ const AllEmployeeList = () => {
                       </NavLink>
                     </Typography>
                   </td>
-                  
                 </tr>
               );
             })}
@@ -182,10 +236,16 @@ const AllEmployeeList = () => {
 
               {/* Action buttons */}
               <div className="flex justify-between gap-4">
-                <Button onClick={()=>handleAdjustSalary(actionEmployee?._id)} className="bg-primary text-white">
+                <Button
+                  onClick={() => handleAdjustSalary(actionEmployee?._id)}
+                  className="bg-primary text-white"
+                >
                   Adjust Salary
                 </Button>
-                <button onClick={onCloseModal} className="bg-secondary py-2 px-4 rounded-lg text-white font-bold">
+                <button
+                  onClick={onCloseModal}
+                  className="bg-secondary py-2 px-4 rounded-lg text-white font-bold"
+                >
                   Cancel
                 </button>
               </div>
