@@ -41,9 +41,14 @@ const DashNav = () => {
                     ? "flex gap-3 border-b-2 border-secondary pb-2 items-center text-lg font-semibold mb-4"
                     : "flex gap-3 hover:border-b-2 items-center text-lg font-semibold mb-4"
                 }><AiFillCode /> OverView</NavLink>
-        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><FaProjectDiagram /> Project</NavLink>
-        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><FaTasks /> Task</NavLink>
-        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><MdOutlinePayments />Payment</NavLink>
+         <NavLink to='/dashboard/myPayment' className={({ isActive }) =>
+                  isActive
+                    ? "flex gap-3 border-b-2 border-secondary pb-2 items-center text-lg font-semibold mb-4"
+                    : "flex gap-3 hover:border-b-2 items-center text-lg font-semibold mb-4"
+                }><MdOutlinePayments />Payment</NavLink>
+        {/* <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><FaProjectDiagram /> Project</NavLink>
+        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><FaTasks /> Task</NavLink> */}
+       
         <NavLink to='/' className='flex gap-3 items-center text-lg font-semibold mb-4'> <FaHome />  Home</NavLink>
 
       </div>
@@ -87,8 +92,12 @@ const DashNav = () => {
                     ? "flex gap-3 border-b-2 border-secondary pb-2 items-center text-lg font-semibold mb-4"
                     : "flex gap-3 hover:border-b-2 items-center text-lg font-semibold mb-4"
                 }> <GiProgression /> Payroll</NavLink>
-        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><GiTeamDowngrade /> Salary Adjustment</NavLink>
-        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-4'><MdOutlinePayments /> Payment History</NavLink>
+        
+        <NavLink to='/adminDashboard/paymentHistory'className={({ isActive }) =>
+                  isActive
+                    ? "flex gap-3 border-b-2 border-secondary pb-2 items-center text-lg font-semibold mb-4"
+                    : "flex gap-3 hover:border-b-2 items-center text-lg font-semibold mb-4"
+                }><MdOutlinePayments /> Payment History</NavLink>
         <NavLink to='/' className='flex gap-3 items-center text-lg font-semibold mb-4'> <FaHome />  Home</NavLink>
         </div>
        }

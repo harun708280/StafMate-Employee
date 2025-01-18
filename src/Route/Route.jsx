@@ -15,6 +15,8 @@ import Progress from "../HR/Progress";
 import AdminLayOut from "../Layout/AdminLayOut";
 import AdminOverView from "../Admin/AdminOverView";
 import PaymentRequest from "../Admin/PaymentRequest";
+import PaymentHistory from "../Admin/PaymentHistory";
+import MyPayment from "../Empolye/MyPayment";
 
 const router = createBrowserRouter([
     {
@@ -48,8 +50,8 @@ const router = createBrowserRouter([
           element:<WorkSheetForm></WorkSheetForm>
         },
         {
-          path:'/dashboard/hrOverview',
-          element:<HrOverview></HrOverview>
+          path:'/dashboard/myPayment',
+          element:<MyPayment></MyPayment>
 
         }
         
@@ -82,6 +84,10 @@ const router = createBrowserRouter([
         {
           path:'/adminDashboard/paymentRequest',
           element:<PaymentRequest></PaymentRequest>
+        },
+        {
+          path:'/adminDashboard/paymentHistory',
+          element:<PaymentHistory></PaymentHistory>
         }
       ]
     }

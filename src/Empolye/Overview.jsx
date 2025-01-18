@@ -11,12 +11,18 @@ import useSecure from "../Hook/useSecure";
 import toast from "react-hot-toast";
 import Swal from 'sweetalert2'
 import useTask from "../Hook/useTask";
+import useMyPayment from "../Hook/useMyPayment";
 
 const Overview = () => {
   const [task, setTask] = useState("");
   const [hours, setHours] = useState();
   const [date, setDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false); 
+
+  const [myPayment,myPaymentRe]=useMyPayment()
+
+  console.log(myPayment);
+  
   
   const {user}=useAuth()
   const secureAxios=useSecure()
@@ -62,7 +68,7 @@ const Overview = () => {
     <div className="my-7 w-11/12 mx-auto">
       {/* Header Section */}
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-extrabold">Dashboard</h1>
+        <h1 className="text-3xl font-extrabold">Dashboard <span  className="text-secondary" >Employee</span> </h1>
         <div className="flex gap-6">
           <button
             className="bg-secondary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
@@ -83,7 +89,10 @@ const Overview = () => {
       <OverViewCard />
 
       {/* Task Management */}
-      <div className="flex justify-end my-6">
+      <p></p>
+      <div className="flex justify-between my-6">
+
+        <h1 className="text-2xl font-bold uppercase"> Task Board</h1>
         <button
           onClick={() => setIsModalOpen(true)} // Correct state function
           className="py-2 px-4 uppercase font-bold bg-secondary rounded-lg flex items-center gap-2"
