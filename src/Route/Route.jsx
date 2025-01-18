@@ -14,6 +14,7 @@ import HrDetails from "../HR/HrDetails";
 import Progress from "../HR/Progress";
 import AdminLayOut from "../Layout/AdminLayOut";
 import AdminOverView from "../Admin/AdminOverView";
+import PaymentRequest from "../Admin/PaymentRequest";
 
 const router = createBrowserRouter([
     {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
         {
           path:'/adminDashboard',
           element:<AdminOverView></AdminOverView>
+        },
+        {
+          path:'/adminDashboard/paymentRequest',
+          element:<PaymentRequest></PaymentRequest>
         }
       ]
     }

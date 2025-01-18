@@ -82,7 +82,7 @@ const DashNav = () => {
                     : "flex gap-3  items-center text-lg font-semibold mb-4"
                 }><FaRegListAlt /> All Employee List</NavLink>
         
-        <NavLink to='/adminDashboard/Payroll' className={({ isActive }) =>
+        <NavLink to='/adminDashboard/paymentRequest' className={({ isActive }) =>
                   isActive
                     ? "flex gap-3 border-b-2 border-secondary pb-2 items-center text-lg font-semibold mb-4"
                     : "flex gap-3 hover:border-b-2 items-center text-lg font-semibold mb-4"

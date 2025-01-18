@@ -79,32 +79,28 @@ const AllEmployeeList = () => {
   };
   const handleFired = (id) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Are you sure to fire?",
+      text: "This action will permanently remove the employee from the company. You won't be able to revert this!",
       icon: "warning",
+
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, fire it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const { data } = await secureAxios.patch(
           `/all-employee-lists/${id}?hr=Fired`
         );
         if (data.modifiedCount > 0) {
-          
           Swal.fire({
             title: "Fired!",
             text: "Successfully this employee fired.",
             icon: "success",
-            confirmButtonColor:'#134E4A'
-  
+            confirmButtonColor: "#134E4A",
           });
           refetch();
-
-          
         }
-        
       }
     });
   };
@@ -166,7 +162,12 @@ const AllEmployeeList = () => {
                   <td className={rowClass}>
                     <div className="flex gap-2">
                       {item.role === "Fired" ? (
-                        <button disabled className="text-red-700 text-lg font-bold">Fired</button>
+                        <button
+                          disabled
+                          className="text-red-700 text-lg font-bold"
+                        >
+                          Fired
+                        </button>
                       ) : (
                         <button onClick={() => handleFired(item._id)}>
                           <img className="h-9" src={fire} alt="Fire" />
