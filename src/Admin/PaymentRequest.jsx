@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 const TABLE_HEAD = [
   "Name",
   "Email",
   "Designation",
-  "Amount",
   "Month-Year",
+  "Amount",
+  
   "Pay",
   "Payment Date",
 ];
@@ -12,10 +13,24 @@ import { Card, Typography } from "@material-tailwind/react";
 import usePayroll from "../Hook/usePayroll";
 import { format } from "date-fns";
 import { FaRegPaperPlane } from "react-icons/fa";
+import { Button, Modal } from "flowbite-react";
+import PaymentModal from "./PaymentModal";
+import useSecure from "../Hook/useSecure";
+import { MdOutlinePayments } from "react-icons/md";
 const PaymentRequest = () => {
   const [payrolls, refetch] = usePayroll();
+  const [openModal, setOpenModal] = useState(false);
+  const [employee,setEmployee]=useState('')
+  const secureAxios=useSecure()
+  const handleEmployee=async(id)=>{
+    const {data}=await secureAxios.get(`/payment-request/${id}`)
+    setEmployee(data)
+    
+    
+
+  }
   return (
-    <div className="my-7 w-full max-w-[1400px] mx-auto">
+    <div className="my-7 w-full overflow-x-hidden ">
       <div className="">
         <h1 className="text-2xl font-bold mb-4">
           Employee Payment Request Table
@@ -83,20 +98,22 @@ const PaymentRequest = () => {
 
                       <td className={rowClass}>
                         <Typography variant="small" className="font-normal">
-                          <button className="flex justify-center items-center gap-2 text-lg font-bold bg-blue-600 py-1 px-5 rounded-lg">
+                          {
+                            item.status==='paid'?<button disabled className="flex justify-center items-center cursor-not-allowed gap-2 text-lg font-bold bg-secondary py-1 px-5 rounded-lg">
+                            <MdOutlinePayments /> Paid
+                          </button>:<button onClick={() =>{ setOpenModal(true),handleEmployee(item._id)}} className="flex justify-center items-center gap-2 text-lg font-bold bg-blue-600 py-1 px-5 rounded-lg">
                             <FaRegPaperPlane /> Pay
                           </button>
+                          }
                         </Typography>
                       </td>
                       <td className={rowClass}>
-                        <Typography
-                          variant="small"
-                          className="font-normal"
-                        >
-                            -
+                        <Typography variant="small" className="font-normal">
+                          {
+                            item.paymentDate?  `${format(new Date(item.paymentDate), "P")}`:'-'
+                          }
                         </Typography>
                       </td>
-
                     </tr>
                   );
                 })}
@@ -111,6 +128,8 @@ const PaymentRequest = () => {
             )}
           </Card>
         </div>
+        <Button >Toggle modal</Button>
+        <PaymentModal openModal={openModal} setOpenModal={setOpenModal} employee={employee} refetch={refetch} ></PaymentModal>
       </div>
     </div>
   );
