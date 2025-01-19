@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import usePublic from "../Hook/usePublic";
 import { useQuery } from "@tanstack/react-query";
 import Marquee from "react-fast-marquee";
+import Faq from "./Faq";
 const Service = () => {
   const publicAxios = usePublic();
   const { data: manages = [], refetch } = useQuery({
@@ -143,6 +144,9 @@ const Service = () => {
             
           </div>
         </div>
+      </div>
+      <div className="">
+        <Faq></Faq>
       </div>
       <div className="container mx-auto">
         <div className="text-center">
