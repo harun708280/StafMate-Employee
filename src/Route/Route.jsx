@@ -22,6 +22,7 @@ import EmployeeRoute from "../Private/EmployeeRoute";
 import HRRoute from "../Private/HRRoute";
 import AdminRoute from "../Private/AdminRoute";
 import Contact from "../Page/Contact";
+import Message from "../Admin/Message";
 
 const router = createBrowserRouter([
     {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
         {
           path:'/adminDashboard/paymentHistory',
           element:<Private><AdminRoute><PaymentHistory></PaymentHistory></AdminRoute></Private>
+        },
+        {
+          path:'/adminDashboard/sms',
+          element:<Private><AdminRoute><Message></Message></AdminRoute></Private>
         }
       ]
     }

@@ -20,7 +20,8 @@ const Contact = () => {
     const number = from.number.value;
     const subject = from.subject.value;
     const message = from.message.value;
-    const contactData={name,email,number,subject,message}
+    const date=new Date()
+    const contactData={name,email,number,subject,message,date}
 
     try {
       const { data } = await publicAxios.post("/message",contactData);
