@@ -75,10 +75,7 @@ const Nav = () => {
             <NavLink to="/" className="text-white text-lg">
               Home
             </NavLink>
-            <NavLink to="/about" className="text-white text-lg">
-              About
-            </NavLink>
-
+            
             <NavLink
               to={
                 role === "Employee"
@@ -87,7 +84,7 @@ const Nav = () => {
                   ? "/hrDashboard"
                   : role === "Admin"
                   ? "/adminDashboard"
-                  : "/" 
+                  : "/login"
               }
               className="text-white text-lg"
             >

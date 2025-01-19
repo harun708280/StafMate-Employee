@@ -5,34 +5,52 @@ import { FaUserLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../Hook/useAuth";
 import usePublic from "../Hook/usePublic";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const navigate=useNavigate()
-  const { LoginGoogle,Login } = useAuth();
-  const publicAxios=usePublic()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { LoginGoogle, Login } = useAuth();
+  const publicAxios = usePublic();
   const handleGoogle = () => {
-    LoginGoogle().then(async (result) => {
+    LoginGoogle()
+    .then(async (result) => {
       const dataUser = {
         name: result?.user?.displayName,
         email: result?.user?.email,
         role: "Employee",
-        status:'false', 
+        status: "false",
 
-        designation:'Sales Assistant',
-        salary:20000,
-        bank_account_no:4242424242424242,
-        photo:result?.user?.photoURL
+        designation: "Sales Assistant",
+        salary: 20000,
+        bank_account_no: 4242424242424242,
+        photo: result?.user?.photoURL,
       };
-      navigate('/')
-      const {data}=await publicAxios.post('/user',dataUser)
       
-      
-      
-      
-      
-    });
+      const { data } = await publicAxios.post("/user", dataUser);
+      toast.success("successfully Login");
+      navigate(`${location.state ? location.state : "/"}`);
+    })
+    .catch(error=>{
+      switch (error.code) {
+        case "auth/user-not-found":
+          toast.error("No user found with this email");
+          break;
+        case "auth/wrong-password":
+          toast.error("Incorrect password. Please try again.");
+          break;
+        case "auth/invalid-email":
+          toast.error("Invalid email address. Please enter a valid email.");
+          break;
+        
+        
+        
+        default:
+          toast.error("An unknown error occurred. Please try again.");
+          console.error("Error Code:", error.code, "Message:", error.message);
+      }
+    })
   };
   const initialValues = {
     email: "",
@@ -50,10 +68,29 @@ const Login = () => {
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     console.log("Form Data", values);
-    Login(values.email,values.password)
-    .then(result=>{
-      navigate('/')
-      toast.success('successfully logon')
+    Login(values.email, values.password)
+    .then((result) => {
+      toast.success('successfully Login')
+        navigate(`${location.state?location.state:'/'}`)
+    })
+    .catch(error=>{
+      switch (error.code) {
+        case "auth/user-not-found":
+          toast.error("No user found with this email");
+          break;
+        case "auth/wrong-password":
+          toast.error("Incorrect password. Please try again.");
+          break;
+        case "auth/invalid-email":
+          toast.error("Invalid email address. Please enter a valid email.");
+          break;
+        
+        
+        
+        default:
+          toast.error("An unknown error occurred. Please try again.");
+          console.error("Error Code:", error.code, "Message:", error.message);
+      }
     })
     setSubmitting(false);
     resetForm();

@@ -17,6 +17,7 @@ import AdminOverView from "../Admin/AdminOverView";
 import PaymentRequest from "../Admin/PaymentRequest";
 import PaymentHistory from "../Admin/PaymentHistory";
 import MyPayment from "../Empolye/MyPayment";
+import Private from "../Private/Private";
 
 const router = createBrowserRouter([
     {
@@ -39,19 +40,19 @@ const router = createBrowserRouter([
     },
     {
       path:'/dashboard',
-      element:<DashLyout></DashLyout>,
+      element:<Private><DashLyout></DashLyout></Private>,
       children:[
         {
           path:'/dashboard',
-          element:<Overview></Overview>
+          element:<Private><Overview></Overview></Private>
         },
         {
           path:'/dashboard/work-sheet',
-          element:<WorkSheetForm></WorkSheetForm>
+          element:<Private><WorkSheetForm></WorkSheetForm></Private>
         },
         {
           path:'/dashboard/myPayment',
-          element:<MyPayment></MyPayment>
+          element:<Private><MyPayment></MyPayment></Private>
 
         }
         
@@ -59,35 +60,35 @@ const router = createBrowserRouter([
     }
     ,{
       path:'/hrDashboard',
-      element:<HrLayout></HrLayout>,
+      element:<Private><HrLayout></HrLayout></Private>,
       children:[
         {
           path:'/hrDashboard',
-          element:<HrOverview></HrOverview>
+          element:<Private><HrOverview></HrOverview></Private>
         },{
           path:'/hrDashboard/details/:id',
-          element:<HrDetails></HrDetails>
+          element:<Private><HrDetails></HrDetails></Private>
         },{
           path:'/hrDashboard/progress',
-          element:<Progress></Progress>
+          element:<Private><Progress></Progress></Private>
         }
       ]
     },
     {
       path:'/adminDashboard',
-      element:<AdminLayOut></AdminLayOut>,
+      element:<Private><AdminLayOut></AdminLayOut></Private>,
       children:[
         {
           path:'/adminDashboard',
-          element:<AdminOverView></AdminOverView>
+          element:<Private><AdminOverView></AdminOverView></Private>
         },
         {
           path:'/adminDashboard/paymentRequest',
-          element:<PaymentRequest></PaymentRequest>
+          element:<Private><PaymentRequest></PaymentRequest></Private>
         },
         {
           path:'/adminDashboard/paymentHistory',
-          element:<PaymentHistory></PaymentHistory>
+          element:<Private><PaymentHistory></PaymentHistory></Private>
         }
       ]
     }

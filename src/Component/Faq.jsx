@@ -12,7 +12,8 @@ const Faq = () => {
   ];
   return (
     <div className="">
-      <h1 className="text-center text-3xl w-5/12 text-white font-bold mx-auto">System to monitor and coordinate employee performance and development.</h1>
+      <h1 className="text-center text-4xl font-extrabold my-2 text-white">Performance & Development Tracker</h1>
+      
       <div className="container mx-auto flex items-center my-12">
       <div className="w-1/2 ">
         <div className="bg-primary w-9/12 p-6 rounded-lg mx-auto bg-opacity-10">
