@@ -14,6 +14,9 @@ export default {
       backgroundImage: {
         'nav': "url('./public/nav.png')", // Background image for navigation
       },
+      boxShadow: {
+        'bottom-xl': '0 10px 15px -3px rgba(0, 0, 0, 0.3)', // Large shadow at the bottom
+      },
     },
   },
   plugins: [

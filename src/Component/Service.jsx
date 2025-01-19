@@ -65,8 +65,9 @@ const Service = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="">
-        <div class="container mx-auto px-6 py-16 bg-primary bg-opacity-25 my-12 ">
+      <div className="relative">
+        <div className="w-full absolute bg-secondary"></div>
+        <div class="container mx-auto px-6 py-16 bg-primary shadow-lg shadow-secondary bg-opacity-25 my-12 ">
           <h2 class="text-4xl font-semibold text-center text-white ">
             How It Works 
             
@@ -155,7 +156,7 @@ const Service = () => {
             <p className="text-gray-300 text-xl font-semibold mb-14">Here's what others have to say about us.</p>
 
         </div>
-      <div className="border p-5 rounded ">
+      <div className="border p-5 rounded shadow-lg">
       <Marquee gradient={false} direction=""  speed={30}>
         <div className="flex items-center space-x-10">
           {/* Add your company logos here */}
