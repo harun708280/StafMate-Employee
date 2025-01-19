@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "flowbite-react";
 import { AiFillCode } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome, FaProjectDiagram, FaRegListAlt, FaTasks } from "react-icons/fa";
 import { MdOutlinePayments } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -9,10 +9,25 @@ import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import useUserRole from "../Hook/useUserRole";
 import { GiProgression, GiTeamDowngrade } from "react-icons/gi";
+import useAuth from "../Hook/useAuth";
+import { Result } from "postcss";
+import toast from "react-hot-toast";
 const DashNav = () => {
 
   const [role]=useUserRole()
-  console.log(role);
+  const navigate=useNavigate()
+
+  const {Logout}=useAuth()
+  const handleLogout=()=>{
+    Logout()
+    .then(result=>{
+      navigate('/')
+      toast.success('successfully logout now')
+      
+    })
+    
+  }
+  
   
   
   return (
@@ -106,7 +121,7 @@ const DashNav = () => {
       <div className="">
         <NavLink className='flex gap-3 items-center text-lg font-semibold mb-2'> <CgProfile /> Profile</NavLink>
         <NavLink className='flex gap-3 items-center text-lg font-semibold mb-2' > <CiSettings />  Setting</NavLink>
-        <NavLink className='flex gap-3 items-center text-lg font-semibold mb-2' ><IoIosLogOut />  Logout</NavLink>
+        <NavLink onClick={handleLogout} className='flex gap-3 items-center text-lg font-semibold mb-2' ><IoIosLogOut />  Logout</NavLink>
       </div>
       </div>
     </div>

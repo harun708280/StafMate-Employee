@@ -26,22 +26,12 @@ const HrDetails = () => {
   };
 
   const prams=useParams()
-  console.log(prams.id);
+  
 
   const secureAxios=useSecure()
 
-  const [employee,setEmployee]=useState()
 
-useEffect(()=>{
-    fetchData()
 
-},[prams?.id])
-
-  const fetchData=async()=>{
-    const {data}=await secureAxios.get(`/employee/${prams?.id}`)
-    setEmployee(data)
-    
-  }
 
   const {data:EmployeeData=[],refetch}=useQuery({
     queryKey:['employee'],
@@ -52,7 +42,17 @@ useEffect(()=>{
 
 
   })
-  console.log(EmployeeData);
+
+
+  const {data:employee}=useQuery({
+    queryKey:'employee',
+    queryFn:async()=>{
+      const res=await secureAxios.get(`/employee/${prams?.id}`)
+      return res.data
+    }
+
+  })
+  
   
   
 

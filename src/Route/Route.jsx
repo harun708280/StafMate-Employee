@@ -21,6 +21,7 @@ import Private from "../Private/Private";
 import EmployeeRoute from "../Private/EmployeeRoute";
 import HRRoute from "../Private/HRRoute";
 import AdminRoute from "../Private/AdminRoute";
+import Contact from "../Page/Contact";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         {
           path:'/register',
           element:<RegistrationForm></RegistrationForm>
+        },
+        {
+          path:'/contact',
+          element:<Contact></Contact>
         }
       ]
     },
