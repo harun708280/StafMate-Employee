@@ -31,7 +31,7 @@ const DashNav = () => {
   };
 
   return (
-    <div className="text-white w-[300px] min-h-svh bg-primary border-r border-primary p-8 bg-opacity-20">
+    <div className="text-white md:w-[300px] md:min-h-svh bg-primary border-r border-primary p-8 bg-opacity-20">
       <div className="flex items-center justify-center space-x-6">
         <h1 className="text-2xl font-bold">
           Staf
@@ -47,7 +47,7 @@ const DashNav = () => {
           </div>{" "}
         </p>
       </div>
-      <div className="flex flex-col justify-between min-h-[80vh]">
+      <div className="flex flex-col justify-between md:min-h-[80vh]">
         {role === "Employee" && (
           <div className="mt-10 text-gray-200 text-sm">
             <p>Platform</p>

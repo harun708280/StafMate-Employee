@@ -68,7 +68,7 @@ const Overview = () => {
     <div className="my-7 w-11/12 mx-auto">
       {/* Header Section */}
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-extrabold">Dashboard <span  className="text-secondary" >Employee</span> </h1>
+        <h1 className="md:text-3xl font-extrabold">Dashboard <span  className="text-secondary" >Employee</span> </h1>
         <div className="flex gap-6">
           <button
             className="bg-secondary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"

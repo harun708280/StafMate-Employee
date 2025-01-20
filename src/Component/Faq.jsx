@@ -14,9 +14,9 @@ const Faq = () => {
     <div className="">
       <h1 className="text-center text-4xl font-extrabold my-2 text-white">Performance & Development Tracker</h1>
       
-      <div className="container mx-auto flex items-center my-12">
-      <div className="w-1/2 ">
-        <div className="bg-primary w-9/12 p-6 rounded-lg mx-auto bg-opacity-10">
+      <div className="container mx-auto md:flex items-center my-12">
+      <div className="md:w-1/2 ">
+        <div className="bg-primary md:w-9/12 p-6 rounded-lg mx-auto bg-opacity-10">
           <div className="container">
             <div className="flex justify-between my-4 text-white text-lg items-center">
               <h1>Engineering & Development </h1>
@@ -55,16 +55,16 @@ const Faq = () => {
         </div>
       </div>
 
-      <div className="w-1/2 flex justify-center items-center">
+      <div className="md:w-1/2 flex justify-center items-center">
       <div className="w-[200px] h-[200px] bg-primary bg-opacity-70 rounded-full blur-2xl absolute"></div>
         <motion.div
           animate={{
-            rotate: 360, // 360 degrees
+            rotate: 360, 
           }}
           transition={{
-            duration: 30, // Time to complete one rotation (in seconds)
-            repeat: Infinity, // Infinite looping
-            ease: "linear", // Smooth rotation
+            duration: 30, 
+            repeat: Infinity, 
+            ease: "linear",
           }}
           className="w-full max-w-[500px] h-full max-h-[500px] flex justify-center items-center"
         >

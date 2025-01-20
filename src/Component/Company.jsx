@@ -13,10 +13,10 @@ const Company = () => {
   return (
     <div className="">
         <p className="text-lg text-white my-7 text-center">Trusted by 225,000+ customers, from startups to enterprises</p>
-        <div className="w-8/12 mx-auto  p-4 bg-primary bg-opacity-20 rounded-lg shadow-lg">
+        <div className="md:w-8/12 mx-auto  p-4 bg-primary bg-opacity-20 rounded-lg shadow-lg">
       
       <Marquee gradient={false}  speed={30}>
-        <div className="flex items-center gap-24 space-x-10">
+        <div className="flex items-center md:gap-24 space-x-10">
           {/* Add your company logos here */}
           <img className="h-20 w-24 mx-10 object-contain" src={i1} alt="Company Logo" />
           <img className="h-20 w-24 object-contain" src={i2} alt="Company Logo" />

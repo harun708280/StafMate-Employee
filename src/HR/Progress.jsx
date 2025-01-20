@@ -40,75 +40,81 @@ const Progress = () => {
       <h1 className="text-2xl font-semibold mb-4">Employee Task Progress</h1>
 
       {/* Filters */}
-      <div className="mb-4">
-        <label className="mr-2">Select Employee:</label>
-        <select
-          className="border p-2 rounded bg-primary focus:outline-none focus:ring-2 focus:ring-blue-400"
-          value={selectedEmployee}
-          onChange={(e) => setSelectedEmployee(e.target.value)}
-        >
-          <option value="" className="text-gray-500">All Employees</option>
-          {employees.map((employee, index) => (
-            <option 
-              key={index} 
-              value={employee}
-              className="hover:bg-blue-200 focus:bg-blue-300"
-            >
-              {employee}
-            </option>
-          ))}
-        </select>
+      <div className="mb-4 overflow-x-auto flex flex-wrap gap-4">
+        <div className="flex items-center w-full sm:w-auto">
+          <label className="mr-2">Select Employee:</label>
+          <select
+            className="border p-2 rounded bg-primary focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={selectedEmployee}
+            onChange={(e) => setSelectedEmployee(e.target.value)}
+          >
+            <option value="" className="text-gray-500">All Employees</option>
+            {employees.map((employee, index) => (
+              <option 
+                key={index} 
+                value={employee}
+                className="hover:bg-blue-200 focus:bg-blue-300"
+              >
+                {employee}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <label className="ml-4 mr-2">Select Month:</label>
-        <select
-          className="border p-2 rounded bg-primary  focus:outline-none focus:ring-2 focus:ring-blue-400"
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
-        >
-          <option value="" className="text-gray-500">All Months</option>
-          {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
-            <option 
-              key={month} 
-              value={month}
-              className="hover:bg-blue-200 focus:bg-blue-300"
-            >
-              {new Date(0, month - 1).toLocaleString('default', { month: 'long' })}
-            </option>
-          ))}
-        </select>
+        <div className="flex items-center w-full sm:w-auto">
+          <label className="mr-2">Select Month:</label>
+          <select
+            className="border p-2 rounded bg-primary focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+          >
+            <option value="" className="text-gray-500">All Months</option>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
+              <option 
+                key={month} 
+                value={month}
+                className="hover:bg-blue-200 focus:bg-blue-300"
+              >
+                {new Date(0, month - 1).toLocaleString('default', { month: 'long' })}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Task Table */}
-      <table className="table-auto w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="border-b px-4 py-2">Employee</th>
-            <th className="border-b px-4 py-2">Task</th>
-            <th className="border-b px-4 py-2">Hours</th>
-            <th className="border-b px-4 py-2">Date</th>
-            <th className="border-b px-4 py-2">URL</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTasks.length === 0 ? (
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full border-collapse">
+          <thead>
             <tr>
-              <td colSpan="5" className="text-center py-4">No tasks found</td>
+              <th className="border-b px-4 py-2">Employee</th>
+              <th className="border-b px-4 py-2">Task</th>
+              <th className="border-b px-4 py-2">Hours</th>
+              <th className="border-b px-4 py-2">Date</th>
+              <th className="border-b px-4 py-2">URL</th>
             </tr>
-          ) : (
-            filteredTasks.map((task, index) => (
-              <tr key={index}>
-                <td className="border-b px-4 py-2">{task.EmployeeName}</td>
-                <td className="border-b px-4 py-2">{task.task}</td>
-                <td className="border-b px-4 py-2">{task.hours}</td>
-                <td className="border-b px-4 py-2">{new Date(task.date).toLocaleDateString()}</td>
-                <td className="border-b px-4 py-2">
-                  <a href={task.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">View URL</a>
-                </td>
+          </thead>
+          <tbody>
+            {filteredTasks.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center py-4">No tasks found</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredTasks.map((task, index) => (
+                <tr key={index}>
+                  <td className="border-b px-4 py-2">{task.EmployeeName}</td>
+                  <td className="border-b px-4 py-2">{task.task}</td>
+                  <td className="border-b px-4 py-2">{task.hours}</td>
+                  <td className="border-b px-4 py-2">{new Date(task.date).toLocaleDateString()}</td>
+                  <td className="border-b px-4 py-2">
+                    <a href={task.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">View URL</a>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

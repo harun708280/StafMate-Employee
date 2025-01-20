@@ -3,7 +3,7 @@ import { FaFlagCheckered } from 'react-icons/fa';
 import { MdAddTask, MdLabel, MdOutlinePayments, MdOutlinePendingActions } from "react-icons/md";
 const OverViewCard = () => {
     return (
-        <div className='my-12 grid grid-cols-4 gap-9 mr-7'>
+        <div className='my-12 grid md:grid-cols-4 gap-9 mr-7'>
             <div className="border rounded-xl  border-primary bg-primary p-4 bg-opacity-30">
                 <div className="flex justify-between items-center text-lg font-semibold">
                     <h1>Total Payment</h1>

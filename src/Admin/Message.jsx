@@ -29,9 +29,9 @@ const Message = () => {
     
     return (
         <div className='p-6'>
-           <p className='flex items-center gap-2 text-3xl font-bold uppercase'> <LiaSmsSolid />ALL Contact Message ({sms.length}) </p>
+           <p className='flex items-center gap-2 md:text-3xl font-bold uppercase'> <LiaSmsSolid />ALL Contact Message ({sms.length}) </p>
            <div className="my-12">
-           <Card className=" w-full border border-primary bg-[#060d22] text-white shadow-lg rounded-lg">
+           <Card className=" w-full overflow-x-auto border border-primary bg-[#060d22] text-white shadow-lg rounded-lg">
             <table className="w-full table-auto border-collapse text-left">
               {/* Table Head */}
               <thead className="bg-primary bg-opacity-30 text-white">

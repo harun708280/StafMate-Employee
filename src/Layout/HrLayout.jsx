@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 const HrLayout = () => {
     return (
         <div>
-            <div className='bg-[#020a13] min-h-svh flex gap-12 text-white'>
+            <div className='bg-[#020a13] min-h-svh flex flex-col md:flex-row gap-12 text-white'>
             <DashNav></DashNav>
             <div className="w-full">
             <Outlet></Outlet>

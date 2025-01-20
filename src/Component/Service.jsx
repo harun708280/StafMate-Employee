@@ -32,39 +32,54 @@ const Service = () => {
 
   return (
     <div className="py-12  ">
-      <p className="text-center my-7 text-3xl font-bold text-white">
+      <p className="text-center my-7 md:text-3xl font-bold text-white">
         What would you like to manage?
       </p>
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
-        freeMode={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {manages.map((item) => (
-          <SwiperSlide key={item.id}>
+    
+    spaceBetween={20}
+    pagination={{
+        clickable: true,
+    }}
+    breakpoints={{
+        640: {
+            slidesPerView: 1, // 1 slide on small devices
+            spaceBetween: 20,
+        },
+        768: {
+            slidesPerView: 3, // 2 slides on medium devices
+            spaceBetween: 30,
+        },
+        1024: {
+            slidesPerView: 3, // 3 slides on large devices
+            spaceBetween: 30,
+        },
+    }}
+    modules={[Pagination]}
+    className="mySwiper"
+>
+    {manages.map((item) => (
+        <SwiperSlide key={item.id}>
             <div className="relative group">
-              <img
-                src={item.image_url}
-                alt={item.title}
-                className=" rounded-lg w-full h-[300px] object-cover"
-              />
-              <div className="absolute inset-0 bg-black opacity-50 group-hover:opacity-80 transition-opacity"></div>
-              <div className="absolute bottom-4 left-4 text-white px-6 py-4 bg-black opacity-70 group-hover:opacity-100 transition-opacity">
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2">{item.description}</p>
-                <button className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">
-                  Get Started
-                </button>
-              </div>
+                <img
+                    src={item.image_url}
+                    alt={item.title}
+                    className="rounded-lg w-full h-[300px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent group-hover:opacity-80 transition-opacity"></div>
+                <div className="absolute bottom-4 left-4 text-white px-6 py-4 bg-black/70 group-hover:bg-black/90 transition-colors rounded">
+                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                    <p className="mt-2 line-clamp-2">{item.description}</p>
+                    <button className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded focus:outline-none focus:ring focus:ring-blue-300">
+                        Get Started
+                    </button>
+                </div>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        </SwiperSlide>
+    ))}
+</Swiper>
+
+
       <div className="relative">
         <div className="w-full absolute bg-secondary"></div>
         <div class="container mx-auto px-6 py-16 bg-primary shadow-lg shadow-secondary bg-opacity-25 my-12 ">
@@ -72,7 +87,7 @@ const Service = () => {
             How It Works 
             
           </h2>
-          <p className="text-5xl font-bold text-center text-white my-5">
+          <p className="md:text-5xl font-bold text-center text-white my-5">
             Start Managing In 4 Easy Steps
           </p>
           <p className="text-center text-xl text-gray-300">
@@ -178,7 +193,7 @@ const Service = () => {
           
         </div>
       </Marquee>
-      <div className="mt-12">
+      <div className="mt-12 hidden md:block">
       <Marquee gradient={false} direction="left"  speed={30}>
         <div className="flex items-center space-x-10">
           {/* Add your company logos here */}

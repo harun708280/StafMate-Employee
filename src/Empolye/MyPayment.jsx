@@ -67,7 +67,7 @@ const MyPayment = () => {
         Payment History {myPayment.length}
       </h2>
 
-      <Card className="w-full border border-primary bg-[#060d22] text-white shadow-lg rounded-lg">
+      <Card className="w-full overflow-x-auto border border-primary bg-[#060d22] text-white shadow-lg rounded-lg">
         {/* Table */}
         <table className="w-full table-auto border-collapse text-left">
           <thead className="bg-primary bg-opacity-30 text-white">

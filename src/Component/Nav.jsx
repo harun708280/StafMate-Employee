@@ -40,28 +40,33 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+<NavLink to="/" className="text-white text-lg">
+              Home
+            </NavLink>
+            
+            <NavLink
+              to={
+                role === "Employee"
+                  ? "/dashboard"
+                  : role === "HR"
+                  ? "/hrDashboard"
+                  : role === "Admin"
+                  ? "/adminDashboard"
+                  : "/login"
+              }
+              className="text-white text-lg"
+            >
+              Go to DashBoard
+            </NavLink>
+
+            <NavLink to="/contact" className="text-white text-lg">
+              Contact
+            </NavLink>
             </ul>
           </div>
-          <a className=" uppercase font-bold text-xl">
+          <a className=" hidden md:block uppercase font-bold text-xl">
             {" "}
             Staf
             <span className="text-secondary text-3xl font-extrabold italic">

@@ -94,7 +94,7 @@ const ProjectTable = () => {
 
   return (
     <div className="p-4">
-      <Card className="h-full w-full border bg-[#060d22] text-white shadow-lg rounded-lg">
+      <Card className="h-full overflow-x-auto w-full border bg-[#060d22] text-white shadow-lg rounded-lg">
         <table className="w-full table-auto border-collapse text-left">
           {/* Table Head */}
           <thead className="bg-primary bg-opacity-30 text-white">

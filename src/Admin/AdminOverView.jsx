@@ -8,7 +8,7 @@ const AdminOverView = () => {
   return (
     <div>
       <div className="flex justify-between items-center mr-5 mt-12">
-        <h1 className="text-3xl font-extrabold">
+        <h1 className="md:text-3xl font-extrabold">
           Dashboard <span className="text-secondary">Admin</span>{" "}
         </h1>
         <div className="flex gap-6">

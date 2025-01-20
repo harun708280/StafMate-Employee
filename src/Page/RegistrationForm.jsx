@@ -6,7 +6,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { Spinner } from "flowbite-react";
 import usePublic from "../Hook/usePublic";
 import useAuth from "../Hook/useAuth";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useUserRole from "../Hook/useUserRole";
 
 const RegistrationForm = () => {
@@ -114,7 +114,7 @@ const RegistrationForm = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue }) => (
-            <Form className="grid grid-cols-2 gap-3">
+            <Form className="md:grid md:grid-cols-2 gap-3">
               {/* Full Name Field */}
               <div className="mb-4">
                 <label htmlFor="name" className="block font-medium mb-1">
@@ -279,11 +279,13 @@ const RegistrationForm = () => {
                     "Register"
                   )}
                 </button>
+                <p>If you have an account, please <NavLink to='/login' className='text-red-600 text-lg' >Login</NavLink> </p>
               </div>
             </Form>
           )}
         </Formik>
       </div>
+
     </div>
   );
 };

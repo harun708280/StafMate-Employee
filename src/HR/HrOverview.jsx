@@ -9,7 +9,7 @@ const HrOverview = () => {
     return (
         <div className='my-12' >
             <div className="flex justify-between items-center mr-5">
-                    <h1 className="text-3xl font-extrabold">Dashboard HR</h1>
+                    <h1 className="md:text-3xl font-extrabold">Dashboard HR</h1>
                     <div className="flex gap-6">
                       <button
                         className="bg-secondary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
