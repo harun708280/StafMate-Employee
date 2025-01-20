@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 const instance = axios.create({
-  baseURL: "http://localhost:9000",
+  baseURL: "https://my-server-nine-xi.vercel.app",
   withCredentials: true,
 });
 
