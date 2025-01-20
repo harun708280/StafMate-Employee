@@ -30,7 +30,7 @@ const Login = () => {
       
       const { data } = await publicAxios.post("/user", dataUser);
       toast.success("successfully Login");
-      navigate(`${location.state ? location.state : "/"}`);
+      navigate(`/`);
     })
     .catch(error=>{
       switch (error.code) {
@@ -71,7 +71,7 @@ const Login = () => {
     Login(values.email, values.password)
     .then((result) => {
       toast.success('successfully Login')
-        navigate(`${location.state?location.state:'/'}`)
+        navigate(`/`)
     })
     .catch(error=>{
       switch (error.code) {

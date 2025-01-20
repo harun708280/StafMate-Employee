@@ -54,7 +54,7 @@ const Nav = () => {
                   ? "/hrDashboard"
                   : role === "Admin"
                   ? "/adminDashboard"
-                  : "/login"
+                  : "/"
               }
               className="text-white text-lg"
             >
@@ -66,14 +66,11 @@ const Nav = () => {
             </NavLink>
             </ul>
           </div>
-          <a className=" hidden md:block uppercase font-bold text-xl">
-            {" "}
-            Staf
+          <NavLink to='/' className='text-xl font-bold' >Staf
             <span className="text-secondary text-3xl font-extrabold italic">
               fM
             </span>
-            ate
-          </a>
+            ate</NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-7">

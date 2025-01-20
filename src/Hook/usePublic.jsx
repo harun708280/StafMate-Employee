@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 
 const publicAxios=axios.create({
-    baseURL:'https://my-server-nine-xi.vercel.app',
+    baseURL:'http://localhost:9000',
     withCredentials:true,
 })
 const usePublic = () => {
