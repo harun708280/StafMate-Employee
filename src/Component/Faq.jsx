@@ -19,35 +19,35 @@ const Faq = () => {
         <div className="bg-primary md:w-9/12 p-6 rounded-lg mx-auto bg-opacity-10">
           <div className="container">
             <div className="flex justify-between my-4 text-white text-lg items-center">
-              <h1>Engineering & Development </h1>
+              <h1 className="w-[230px] ">Engineering & Development </h1>
               <div className="border-b-2 border-yellow-300 w-[200px]"></div>
               <p>50%</p>
             </div>
           </div>
           <div className="container">
             <div className="flex justify-between my-4 text-white text-lg items-center">
-              <h1>Management & Advisors </h1>
+              <h1 className="w-[230px]">Management & Advisors </h1>
               <div className="border-b-2 border-red-500 w-[200px]"></div>
               <p>20%</p>
             </div>
           </div>
           <div className="container">
             <div className="flex justify-between my-4 text-white text-lg items-center">
-              <h1>Sales & Marketing : </h1>
+              <h1 className="w-[230px]">Sales & Marketing  </h1>
               <div className="border-b-2 border-green-500 w-[200px]"></div>
               <p>30%</p>
             </div>
           </div>
           <div className="container">
             <div className="flex justify-between my-4 text-white text-lg items-center">
-              <h1>Support & Customer Service </h1>
+              <h1 className="w-[230px]">Support & Customer Service </h1>
               <div className="border-b-2 border-purple-500 w-[200px]"></div>
               <p>10%</p>
             </div>
           </div>
           <div className="container">
             <div className="flex justify-between my-4 text-white text-lg items-center">
-              <h1>Training & Development </h1>
+              <h1 className="w-[230px]">Training & Development </h1>
               <div className="border-b-2 border-teal-500 w-[200px]"></div>
               <p>5%</p>
             </div>

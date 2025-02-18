@@ -11,6 +11,7 @@ import usePublic from "../Hook/usePublic";
 import { useQuery } from "@tanstack/react-query";
 import Marquee from "react-fast-marquee";
 import Faq from "./Faq";
+import PricingPlans from "./PricingPlans";
 const Service = () => {
   const publicAxios = usePublic();
   const { data: manages = [], refetch } = useQuery({
@@ -20,7 +21,7 @@ const Service = () => {
       return res.data;
     },
   });
-  const { data: comments = [],  } = useQuery({
+  const { data: comments = [] } = useQuery({
     queryKey: ["comments"],
     queryFn: async () => {
       const res = await publicAxios.get("/comments");
@@ -36,56 +37,62 @@ const Service = () => {
         What would you like to manage?
       </p>
       <Swiper
-    
-    spaceBetween={20}
-    pagination={{
-        clickable: true,
-    }}
-    breakpoints={{
-        640: {
+        spaceBetween={20}
+        pagination={{
+          clickable: true,
+        }}
+        breakpoints={{
+          640: {
             slidesPerView: 1, // 1 slide on small devices
             spaceBetween: 20,
-        },
-        768: {
+          },
+          768: {
             slidesPerView: 3, // 2 slides on medium devices
             spaceBetween: 30,
-        },
-        1024: {
+          },
+          1024: {
             slidesPerView: 3, // 3 slides on large devices
             spaceBetween: 30,
-        },
-    }}
-    modules={[Pagination]}
-    className="mySwiper"
->
-    {manages.map((item) => (
-        <SwiperSlide key={item.id}>
+          },
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        {manages.map((item) => (
+          <SwiperSlide key={item.id}>
             <div className="relative group">
-                <img
-                    src={item.image_url}
-                    alt={item.title}
-                    className="rounded-lg w-full h-[300px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent group-hover:opacity-80 transition-opacity"></div>
-                <div className="absolute bottom-4 left-4 text-white px-6 py-4 bg-black/70 group-hover:bg-black/90 transition-colors rounded">
-                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                    <p className="mt-2 line-clamp-2">{item.description}</p>
-                    <button className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded focus:outline-none focus:ring focus:ring-blue-300">
-                        Get Started
-                    </button>
-                </div>
+              <img
+                src={item.image_url}
+                alt={item.title}
+                className="rounded-lg w-full h-[300px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent group-hover:opacity-80 transition-opacity"></div>
+              <div className="absolute bottom-4 left-4 text-white px-6 py-4 bg-black/70 group-hover:bg-black/90 transition-colors rounded">
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="mt-2 line-clamp-2">{item.description}</p>
+                <button className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded focus:outline-none focus:ring focus:ring-blue-300">
+                  Get Started
+                </button>
+              </div>
             </div>
-        </SwiperSlide>
-    ))}
-</Swiper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
+      
+      <div className="">
+        <PricingPlans></PricingPlans>
+      </div>
+
+      <div className="mt-12">
+        <Faq></Faq>
+      </div>
 
       <div className="relative">
         <div className="w-full absolute bg-secondary"></div>
         <div class="container mx-auto px-6 py-16 bg-primary shadow-lg shadow-secondary bg-opacity-25 my-12 ">
           <h2 class="text-4xl font-semibold text-center text-white ">
-            How It Works 
-            
+            How It Works
           </h2>
           <p className="md:text-5xl font-bold text-center text-white my-5">
             Start Managing In 4 Easy Steps
@@ -155,71 +162,86 @@ const Service = () => {
                   Track employee performance and generate detailed reports
                 </p>
               </div>
-              
             </div>
-            
           </div>
         </div>
       </div>
-      <div className="">
-        <Faq></Faq>
-      </div>
+      
       <div className="container mx-auto">
         <div className="text-center">
-            <button className="bg-slate-600 text-white py-1 px-5 rounded">Words From Other</button>
-            <h1 className="text-5xl font-bold text-white my-3">It's not just us.</h1>
-            <p className="text-gray-300 text-xl font-semibold mb-14">Here's what others have to say about us.</p>
+          <button className="bg-slate-600 text-white py-1 px-5 rounded">
+            Words From Other
+          </button>
+          <h1 className="text-5xl font-bold text-white my-3">
+            It's not just us.
+          </h1>
+          <p className="text-gray-300 text-xl font-semibold mb-14">
+            Here's what others have to say about us.
+          </p>
+        </div>
+        <div className="border p-5 rounded shadow-lg">
+          <Marquee gradient={false} direction="" speed={30}>
+            <div className="flex items-center space-x-10">
+              {/* Add your company logos here */}
 
-        </div>
-      <div className="border p-5 rounded shadow-lg">
-      <Marquee gradient={false} direction=""  speed={30}>
-        <div className="flex items-center space-x-10">
-          {/* Add your company logos here */}
-          
-          {
-            comments.map(item=><div><div class="max-w-sm border bg-primary bg-opacity-15 border-primary rounded-lg shadow-lg overflow-hidden p-6  ">
-                 <div className="flex items-center gap-5">
-                 <img className="h-20 w-20 rounded-full border-primary border-2" src={item.image} alt={item.name} />
-                 <h3 class="text-lg font-semibold text-white mb-2">{item.name}</h3>
-                 </div>
-                
+              {comments.map((item) => (
                 <div>
-                  
-                 
-                  <p class="text-gray-400 text-sm leading-relaxed">Excellent service, a team that listens, and solutions that work. What more could you ask for?</p>
+                  <div class="max-w-sm border bg-primary bg-opacity-15 border-primary rounded-lg shadow-lg overflow-hidden p-6  ">
+                    <div className="flex items-center gap-5">
+                      <img
+                        className="h-20 w-20 rounded-full border-primary border-2"
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <h3 class="text-lg font-semibold text-white mb-2">
+                        {item.name}
+                      </h3>
+                    </div>
+
+                    <div>
+                      <p class="text-gray-400 text-sm leading-relaxed">
+                        Excellent service, a team that listens, and solutions
+                        that work. What more could you ask for?
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div></div>)
-          }
-          
+              ))}
+            </div>
+          </Marquee>
+          <div className="mt-12 hidden md:block">
+            <Marquee gradient={false} direction="left" speed={30}>
+              <div className="flex items-center space-x-10">
+                {/* Add your company logos here */}
+
+                {comments.map((item) => (
+                  <div>
+                    <div class="max-w-sm border rounded-lg shadow-lg overflow-hidden p-6 bg-primary bg-opacity-15 border-primary  ">
+                      <div className="flex items-center gap-5">
+                        <img
+                          className="h-20 w-20 rounded-full border-primary border-2"
+                          src={item.image}
+                          alt={item.name}
+                        />
+                        <h3 class="text-lg font-semibold text-white mb-2">
+                          {item.name}
+                        </h3>
+                      </div>
+
+                      <div>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                          Excellent service, a team that listens, and solutions
+                          that work. What more could you ask for?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Marquee>
+          </div>
         </div>
-      </Marquee>
-      <div className="mt-12 hidden md:block">
-      <Marquee gradient={false} direction="left"  speed={30}>
-        <div className="flex items-center space-x-10">
-          {/* Add your company logos here */}
-          
-          {
-            comments.map(item=><div><div class="max-w-sm border rounded-lg shadow-lg overflow-hidden p-6 bg-primary bg-opacity-15 border-primary  ">
-                 <div className="flex items-center gap-5">
-                 <img className="h-20 w-20 rounded-full border-primary border-2" src={item.image} alt={item.name} />
-                 <h3 class="text-lg font-semibold text-white mb-2">{item.name}</h3>
-                 </div>
-                
-                <div>
-                  
-                 
-                  <p class="text-gray-400 text-sm leading-relaxed">Excellent service, a team that listens, and solutions that work. What more could you ask for?</p>
-                </div>
-              </div></div>)
-          }
-          
-        </div>
-      </Marquee>
-      </div>
-      </div>
-      <div className="">
-        
-      </div>
+        <div className=""></div>
       </div>
     </div>
   );
