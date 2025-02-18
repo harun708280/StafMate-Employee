@@ -18,7 +18,7 @@ const Nav = () => {
   console.log(role);
 
   return (
-    <div className="bg-teal-900  w-full top-0 z-50 text-white">
+    <div className="bg-teal-900  w-full fixed mb-12 top-0 z-50 text-white">
       <div className="navbar w-11/12 mx-auto max-[1600px]">
         <div className="navbar-start">
           <div className="dropdown">
@@ -42,42 +42,44 @@ const Nav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-<NavLink to="/" className="text-white text-lg">
-              Home
-            </NavLink>
-            
-            <NavLink
-              to={
-                role === "Employee"
-                  ? "/dashboard"
-                  : role === "HR"
-                  ? "/hrDashboard"
-                  : role === "Admin"
-                  ? "/adminDashboard"
-                  : "/"
-              }
-              className="text-white text-lg"
-            >
-              Go to DashBoard
-            </NavLink>
+              <NavLink to="/" className="text-white text-lg">
+                Home
+              </NavLink>
 
-            <NavLink to="/contact" className="text-white text-lg">
-              Contact
-            </NavLink>
+              <NavLink
+                to={
+                  role === "Employee"
+                    ? "/dashboard"
+                    : role === "HR"
+                    ? "/hrDashboard"
+                    : role === "Admin"
+                    ? "/adminDashboard"
+                    : "/"
+                }
+                className="text-white text-lg"
+              >
+                Go to DashBoard
+              </NavLink>
+
+              <NavLink to="/contact" className="text-white text-lg">
+                Contact
+              </NavLink>
             </ul>
           </div>
-          <NavLink to='/' className='text-xl font-bold' >Staf
+          <NavLink to="/" className="text-xl font-bold">
+            Staf
             <span className="text-secondary text-3xl font-extrabold italic">
               fM
             </span>
-            ate</NavLink>
+            ate
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-7">
             <NavLink to="/" className="text-white text-lg">
               Home
             </NavLink>
-            
+
             <NavLink
               to={
                 role === "Employee"
