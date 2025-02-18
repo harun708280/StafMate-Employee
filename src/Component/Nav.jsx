@@ -18,7 +18,7 @@ const Nav = () => {
   console.log(role);
 
   return (
-    <div className="bg-teal-900  w-full fixed mb-12 top-0 z-50 text-white">
+    <div className="bg-teal-950  w-full fixed mb-12 top-0 z-50 text-white">
       <div className="navbar w-11/12 mx-auto max-[1600px]">
         <div className="navbar-start">
           <div className="dropdown">
