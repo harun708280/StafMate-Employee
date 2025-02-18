@@ -12,6 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 import Marquee from "react-fast-marquee";
 import Faq from "./Faq";
 import PricingPlans from "./PricingPlans";
+import { ExpandableCardDemo } from "./ExpandableCardDemo";
+import FAQs from "./FAQS";
+
 const Service = () => {
   const publicAxios = usePublic();
   const { data: manages = [], refetch } = useQuery({
@@ -88,6 +91,26 @@ const Service = () => {
         <Faq></Faq>
       </div>
 
+      <div className="container bg-primary p-6 bg-opacity-30 my-12 mx-auto text-white">
+      <h2 className="text-3xl text-center my-20 font-bold text-white">🏆 Top Contributors</h2>
+      <div className="flex flex-col md:flex-row max-w-[1200px] mx-auto justify-between items-center ">
+      
+      <div className="text-white">
+      <h3 className="text-3xl font-bold  mt-2">Our Most Dedicated Team Members</h3>
+        <p className=" mt-2 text-lg font-medium max-w-3xl mx-auto">
+        Behind every successful project, there are hardworking individuals who dedicate their time and effort to 
+          ensure everything runs smoothly. This section highlights our top contributors—team members who have gone above 
+          and beyond to achieve excellence. Their dedication, persistence, and commitment have played a crucial role in 
+          driving the project forward.
+        </p>
+      </div>
+      <div className="w-6/12">
+      <ExpandableCardDemo></ExpandableCardDemo>
+      </div>
+     
+
+      </div>
+      </div>
       <div className="relative">
         <div className="w-full absolute bg-secondary"></div>
         <div class="container mx-auto px-6 py-16 bg-primary shadow-lg shadow-secondary bg-opacity-25 my-12 ">
@@ -166,6 +189,12 @@ const Service = () => {
           </div>
         </div>
       </div>
+
+      <div className="">
+        <FAQs></FAQs>
+      </div>
+
+      
       
       <div className="container mx-auto">
         <div className="text-center">
@@ -207,6 +236,9 @@ const Service = () => {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="">
+             
             </div>
           </Marquee>
           <div className="mt-12 hidden md:block">
