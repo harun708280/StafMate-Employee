@@ -9,7 +9,7 @@ const LayOut = () => {
           
             <Nav></Nav>
 
-            <div className="min-h-[calc(100svh-50px)]">
+            <div className="min-h-[calc(100svh-50px)] pt-12">
             <Outlet></Outlet>
             </div>
             <Footer></Footer>

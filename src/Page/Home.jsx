@@ -7,8 +7,8 @@ import Service from "../Component/Service";
 
 const Home = () => {
   return (
-    <div className="bg-[#020a13]">
-      <div className="bg-primary mb-8 bg-opacity-30 border-b-4 border-primary shadow-bottom  rounded-b-[100px]   ">
+    <div className="">
+      <div className=" mb-8 bg-opacity-30   rounded-b-[100px]   ">
         <Banner></Banner>
       </div>
       <Company></Company>
