@@ -190,9 +190,7 @@ const Service = () => {
         </div>
       </div>
 
-      <div className="">
-        <FAQs></FAQs>
-      </div>
+      
 
       
       
@@ -273,8 +271,13 @@ const Service = () => {
             </Marquee>
           </div>
         </div>
-        <div className=""></div>
+        <div className="">
+        <div className="">
+        <FAQs></FAQs>
       </div>
+        </div>
+      </div>
+
     </div>
   );
 };
