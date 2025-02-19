@@ -180,9 +180,9 @@ const MyPayment = () => {
               alignItems: "center",
               gap: "12px",
             }}
-            className="text-xl bg-primary"
+            className="text-xl "
           >
-            <select className="bg-primary bg-opacity-15 border"
+            <select className="bg-primary rounded bg-opacity-15 border"
               value={itemsPerPage}
               onChange={handleItemsPerPageChange}
               name="itemsPerPage"

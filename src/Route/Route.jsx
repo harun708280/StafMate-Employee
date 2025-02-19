@@ -24,6 +24,7 @@ import AdminRoute from "../Private/AdminRoute";
 import Contact from "../Page/Contact";
 import Message from "../Admin/Message";
 import EmployeeDetails from "../Admin/EmployeeDetails";
+import Profile from "@/Empolye/Profile";
 
 const router = createBrowserRouter([
     {
@@ -45,7 +46,8 @@ const router = createBrowserRouter([
         {
           path:'/contact',
           element:<Contact></Contact>
-        }
+        },
+        
       ]
     },
     {
@@ -64,6 +66,10 @@ const router = createBrowserRouter([
           path:'/dashboard/myPayment',
           element:<Private><EmployeeRoute><MyPayment></MyPayment></EmployeeRoute></Private>
 
+        },
+        {
+          path:'/dashboard/profile',
+          element:<Private><Profile></Profile></Private>
         }
         
       ]
@@ -81,6 +87,10 @@ const router = createBrowserRouter([
         },{
           path:'/hrDashboard/progress',
           element:<Private><HRRoute><Progress></Progress></HRRoute></Private>
+        },
+        {
+          path:'/hrDashboard/profile',
+          element:<Private><Profile></Profile></Private>
         }
       ]
     },
@@ -107,6 +117,10 @@ const router = createBrowserRouter([
         {
           path:'/adminDashboard/details/:id',
           element:<Private><EmployeeDetails></EmployeeDetails></Private>
+        },
+        {
+          path:'/adminDashboard/profile',
+          element:<Private><Profile></Profile></Private>
         }
       ]
     }

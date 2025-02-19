@@ -189,7 +189,7 @@ const DashNav = () => {
         )}
 
         <div className="">
-          <NavLink className="flex gap-3 items-center text-lg font-semibold mb-2">
+          <NavLink to={`${role === "Admin"&&'/adminDashboard/profile'||role === "Employee"&&"/dashboard/profile"||role === "HR"&&'/dashboard/profile'}`} className="flex gap-3 items-center text-lg font-semibold mb-2">
             {" "}
             <CgProfile /> Profile
           </NavLink>
