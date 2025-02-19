@@ -5,7 +5,7 @@ import Footer from '../Component/Footer';
 
 const LayOut = () => {
     return (
-        <div className='bg-[#020a13] '>
+        <div className='bg-[#020a13] overflow-hidden '>
           
             <Nav></Nav>
 

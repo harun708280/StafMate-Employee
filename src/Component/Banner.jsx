@@ -14,7 +14,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="md:flex items-center  gap-12 max-w-[1600px] py-12 mx-auto w-11/12 relative">
+    <div className="flex md:flex-row flex-col items-center  gap-12 max-w-[1600px] py-12 mx-auto w-11/12 relative">
       <div className="md:w-1/2 flex-1 w-full space-y-4">
         <h1 className="text-2xl md:text-5xl text-white font-extrabold rounded-lg shadow-lg p-3 shadow-secondary">
           Efficient HR Solutions for Your Business Growth.
@@ -45,7 +45,7 @@ const Banner = () => {
           <motion.img
             animate={{ y: [0, 30, 0] }}
             transition={{ duration: 5, repeat: Infinity }}
-            className="w-[700px] rounded-lg border-2 border-primary"
+            className="md:w-[700px] rounded-lg border-2 border-primary"
             src={"/assets/dash.png"}
             alt="Dashboard"
           />
