@@ -25,6 +25,7 @@ import Contact from "../Page/Contact";
 import Message from "../Admin/Message";
 import EmployeeDetails from "../Admin/EmployeeDetails";
 import Profile from "@/Empolye/Profile";
+import About from "@/Component/About";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         {
           path:'/contact',
           element:<Contact></Contact>
+        },
+        {
+          path:'/about',
+          element:<About/>
         },
         
       ]

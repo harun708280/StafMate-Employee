@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQs() {
   const faqs = [
@@ -26,10 +27,15 @@ export default function FAQs() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const itemVariants = {
+    open: { opacity: 1, height: "auto" },
+    closed: { opacity: 0, height: 0 }
+  };
+
   return (
     <section className="py-16 bg-primary bg-opacity-20 my-20">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-white">❓ FAQs</h2>
+        <h2 className="text-3xl font-bold text-white"> FAQs</h2>
         <p className="text-white mt-2">Find answers to the most commonly asked questions.</p>
       </div>
 
@@ -40,7 +46,20 @@ export default function FAQs() {
               {faq.question}
               <span className="text-primary">{openIndex === index ? "➖" : "➕"}</span>
             </h3>
-            {openIndex === index && <p className="text-gray-600 mt-2">{faq.answer}</p>}
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.p
+                  className="text-gray-600 mt-2"
+                  variants={itemVariants}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {faq.answer}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
         ))}
       </div>

@@ -26,21 +26,7 @@ const PaymentModal = ({ openModal, setOpenModal, employee,refetch }) => {
 
     console.log("Payment Data Submitted:", paymentData);
 
-    // এখানে API কল করুন পেমেন্ট ডেটা সংরক্ষণের জন্য
-    // Example:
-    // fetch('/api/payment', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(paymentData),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     alert("Payment Successful!");
-    //   })
-    //   .catch(error => {
-    //     console.error("Error:", error);
-    //   });
+   
 
     alert("Payment processed successfully!");
     setOpenModal(false);

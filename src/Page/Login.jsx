@@ -97,7 +97,7 @@ const Login = () => {
   };
 
   return (
-    <div className="">
+    <div className="md:mt-24">
       {" "}
       {/* Added margin-top to ensure spacing from navbar */}
       <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">
@@ -107,7 +107,7 @@ const Login = () => {
             <FaUserLock />
           </span>{" "}
           Login Staf
-          <span className="text-secondary text-3xl font-extrabold italic">
+          <span className="text-primary text-3xl font-extrabold italic">
             fM
           </span>
           ate
@@ -169,7 +169,7 @@ const Login = () => {
               <div className="text-center mt-3">
                 <button
                   type="submit"
-                  className="bg-secondary text-white w-full px-4 py-2 rounded-lg hover:bg-teal-700 transition"
+                  className="bg-primary text-white w-full px-4 py-2 rounded-lg hover:bg-teal-700 transition"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Logging in..." : "Login"}

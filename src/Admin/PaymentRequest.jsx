@@ -5,7 +5,7 @@ const TABLE_HEAD = [
   "Designation",
   "Month-Year",
   "Amount",
-  
+
   "Pay",
   "Payment Date",
 ];
@@ -20,15 +20,12 @@ import { MdOutlinePayments } from "react-icons/md";
 const PaymentRequest = () => {
   const [payrolls, refetch] = usePayroll();
   const [openModal, setOpenModal] = useState(false);
-  const [employee,setEmployee]=useState('')
-  const secureAxios=useSecure()
-  const handleEmployee=async(id)=>{
-    const {data}=await secureAxios.get(`/payment-request/${id}`)
-    setEmployee(data)
-    
-    
-
-  }
+  const [employee, setEmployee] = useState("");
+  const secureAxios = useSecure();
+  const handleEmployee = async (id) => {
+    const { data } = await secureAxios.get(`/payment-request/${id}`);
+    setEmployee(data);
+  };
   return (
     <div className="my-7 w-full overflow-x-hidden ">
       <div className="">
@@ -98,20 +95,30 @@ const PaymentRequest = () => {
 
                       <td className={rowClass}>
                         <Typography variant="small" className="font-normal">
-                          {
-                            item.status==='paid'?<button disabled className="flex justify-center items-center cursor-not-allowed gap-2 text-lg font-bold bg-secondary py-1 px-5 rounded-lg">
-                            <MdOutlinePayments /> Paid
-                          </button>:<button onClick={() =>{ setOpenModal(true),handleEmployee(item._id)}} className="flex justify-center items-center gap-2 text-lg font-bold bg-blue-600 py-1 px-5 rounded-lg">
-                            <FaRegPaperPlane /> Pay
-                          </button>
-                          }
+                          {item.status === "paid" ? (
+                            <button
+                              disabled
+                              className="flex justify-center items-center cursor-not-allowed gap-2 text-lg font-bold bg-secondary py-1 px-5 rounded-lg"
+                            >
+                              <MdOutlinePayments /> Paid
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                setOpenModal(true), handleEmployee(item._id);
+                              }}
+                              className="flex justify-center items-center gap-2 text-lg font-bold bg-blue-600 py-1 px-5 rounded-lg"
+                            >
+                              <FaRegPaperPlane /> Pay
+                            </button>
+                          )}
                         </Typography>
                       </td>
                       <td className={rowClass}>
                         <Typography variant="small" className="font-normal">
-                          {
-                            item.paymentDate?  `${format(new Date(item.paymentDate), "P")}`:'-'
-                          }
+                          {item.paymentDate
+                            ? `${format(new Date(item.paymentDate), "P")}`
+                            : "-"}
                         </Typography>
                       </td>
                     </tr>
@@ -128,8 +135,13 @@ const PaymentRequest = () => {
             )}
           </Card>
         </div>
-        <Button >Toggle modal</Button>
-        <PaymentModal openModal={openModal} setOpenModal={setOpenModal} employee={employee} refetch={refetch} ></PaymentModal>
+        <Button>Toggle modal</Button>
+        <PaymentModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          employee={employee}
+          refetch={refetch}
+        ></PaymentModal>
       </div>
     </div>
   );

@@ -1,34 +1,90 @@
 import React from "react";
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "framer-motion";
-import { HoverBorderGradientDemo } from "./HoverBorderGradientDemo";
+import { FaArrowRight } from "react-icons/fa";
+import useUserRole from "@/Hook/useUserRole";
+import { Link, NavLink } from "react-router-dom";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8, ease: "easeInOut" } },
+};
+
+const textVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+};
+
+const buttonVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeInOut", delay: 0.4 } },
+  hover: { scale: 1.05, transition: { duration: 0.2 } },
+};
+
+const rotatingCircleVariants = {
+  animate: {
+    rotate: 360,
+    transition: { duration: 120, repeat: Infinity, ease: "linear" },
+  },
+};
+
+const floatingImageVariants = {
+  animate: {
+    y: [0, 20, 0],
+    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+  },
+};
+
 export function BackgroundBeamsWithCollisionDemo() {
+  const [role] = useUserRole();
   return (
-    (<BackgroundBeamsWithCollision>
-      <div className="md:flex overflow-hidden items-center mt-12 pb-12  gap-12 max-w-[1600px] py-12 mx-auto w-11/12 relative">
-      <div className="md:w-1/2  w-full space-y-4">
-        <h1 className="text-2xl md:text-5xl text-white font-extrabold rounded-lg shadow-lg p-3 shadow-secondary">
-          Efficient HR Solutions for <span className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-primary via-primary to-secondary py-4">Your Business Growth</span>.
-          
-        </h1>
-        <p className="text-lg text-white">
-          Streamline your workforce management with our innovative HR solutions,
+    <motion.div
+      className=" py-20 md:py-32 overflow-hidden relative"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 flex items-center justify-between md:gap-16">
+        {/* Left Text Section */}
+        <motion.div className="md:w-1/2 w-full space-y-6" variants={textVariants}>
+        <h1 className="text-3xl md:text-5xl text-white font-bold" style={{ lineHeight: '1.2' }}>
+  Unlock Your Team's Potential with Our Efficient HR Solutions.
+</h1>
+          <p className="text-lg text-white opacity-80">
+            Revolutionize your workforce management through our cutting-edge HR platform,
+            crafted to boost productivity, streamline operations, and drive sustainable business growth.
+          </p>
+         <div className="">
+         <Link
+                to={
+                  role === "Employee"
+                    ? "/dashboard"
+                    : role === "HR"
+                    ? "/hrDashboard"
+                    : role === "Admin"
+                    ? "/adminDashboard"
+                    : "/"
+                }
+                className="text-white text-lg mt-4"
+              >
+          <motion.button
+            className="bg-primary py-3 px-6 rounded-lg uppercase text-white font-semibold flex items-center gap-2"
+            variants={buttonVariants}
+            whileHover="hover"
+          >
+            Explore Features <FaArrowRight />
+          </motion.button>
+          </Link>
+         </div>
+        </motion.div>
 
-          designed to drive productivity and foster business growth.
-        </p>
-        <button className="bg-[#F43F5E] py-2 px-4 rounded-lg uppercase text-white font font-semibold">
-          Get Started
-        </button>
-      </div>
-
-      {/* Rotating Circular Animation */}
-      <div className="w-1/2 mx-auto flex justify-end pb-12 relative">
+        {/* Right Image and Animation Section */}
+        <div className="w-1/2 mx-auto flex justify-end pb-12 relative">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 110, repeat: Infinity, ease: "linear" }}
           className="flex flex-1 items-center justify-center"
         >
-          <div className="md:h-[600px]  opacity-20 shadow-2xl shadow-secondary  md:w-[600px] border-[3px] border-gray-500 border-dashed flex justify-center items-center rounded-full">
+          <div className="md:h-[600px]  opacity-20 shadow-2xl   md:w-[600px] border-[3px] border-gray-500 border-dashed flex justify-center items-center rounded-full">
             <div className="md:h-[500px] md:w-[500px] border-gray-500 shadow-xl border-[3px] border-dashed rounded-full"></div>
           </div>
         </motion.div>
@@ -44,8 +100,9 @@ export function BackgroundBeamsWithCollisionDemo() {
           />
         </div>
       </div>
-    </div>
-    </BackgroundBeamsWithCollision>)
+      </div>
+    </motion.div>
   );
 }
-export default BackgroundBeamsWithCollisionDemo
+
+export default BackgroundBeamsWithCollisionDemo;

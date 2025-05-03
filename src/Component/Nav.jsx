@@ -18,7 +18,7 @@ const Nav = () => {
   console.log(role);
 
   return (
-    <div className="bg-primary border-b border-gray-500 bg-opacity-15 w-full fixed mb-12 top-0 z-50 text-white">
+    <div className=" border-b border-gray-500 bg-opacity-15 w-full fixed mb-12 top-0 z-50 text-white">
       <div className="navbar w-11/12 mx-auto max-[1600px]">
         <div className="navbar-start">
           <div className="dropdown">
@@ -64,11 +64,14 @@ const Nav = () => {
               <NavLink to="/contact" className="text-white text-lg">
                 Contact
               </NavLink>
+              <NavLink to="/about" className="text-white text-lg">
+                About
+              </NavLink>
             </ul>
           </div>
           <NavLink to="/" className="text-xl font-bold">
             Staf
-            <span className="text-secondary text-3xl font-extrabold italic">
+            <span className="text-primary text-3xl font-extrabold italic">
               fM
             </span>
             ate
@@ -80,6 +83,15 @@ const Nav = () => {
               Home
             </NavLink>
 
+            
+
+            
+            <NavLink to="/about" className="text-white text-lg">
+              About
+            </NavLink>
+            <NavLink to="/contact" className="text-white text-lg">
+              Contact
+            </NavLink>
             <NavLink
               to={
                 role === "Employee"
@@ -93,10 +105,6 @@ const Nav = () => {
               className="text-white text-lg"
             >
               Go to DashBoard
-            </NavLink>
-
-            <NavLink to="/contact" className="text-white text-lg">
-              Contact
             </NavLink>
           </ul>
         </div>
@@ -113,7 +121,7 @@ const Nav = () => {
               />
               <button
                 onClick={handleLogout}
-                className="bg-secondary px-4 rounded-lg text-lg font-semibold"
+                className="bg-primary px-4 rounded-lg text-lg font-semibold"
               >
                 Logout
               </button>
@@ -121,12 +129,12 @@ const Nav = () => {
           ) : (
             <div className="flex gap-5">
               <NavLink to="/login">
-                <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
+                <button className="bg-primary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
                   Login
                 </button>
               </NavLink>
               <NavLink to="/register">
-                <button className="bg-secondary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
+                <button className="bg-primary py-2 px-4 rounded-lg uppercase text-white font font-semibold">
                   Registration
                 </button>
               </NavLink>

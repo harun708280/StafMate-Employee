@@ -11,7 +11,7 @@ const Faq = () => {
     { id: 5, title: "Card 5", content: "This is the fifth card." },
   ];
   return (
-    <div className="">
+    <div className="py-20">
       <h1 className="text-center text-4xl font-extrabold my-2 text-white">Performance & Development Tracker</h1>
       
       <div className="container mx-auto md:flex items-center my-12">
@@ -56,7 +56,7 @@ const Faq = () => {
       </div>
 
       <div className="md:w-1/2 flex justify-center items-center">
-      <div className="w-[200px] h-[200px] bg-primary bg-opacity-70 rounded-full blur-2xl absolute"></div>
+      
         <motion.div
           animate={{
             rotate: 360, 

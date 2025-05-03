@@ -35,7 +35,7 @@ const CheckoutForm = ({ employee, setOpenModal, refetch }) => {
       const { data } = await secureAxios.post(`/create-payment-intent`, {
         employeeId: employee?._id,
       });
-      setEmployeeSecret(data.clientSecret); // Set the client secret correctly
+      setEmployeeSecret(data.clientSecret);
       setLoading(false);
     } catch (err) {
       console.error(err);

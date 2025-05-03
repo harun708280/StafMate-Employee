@@ -88,12 +88,12 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-12">
+    <div className="flex justify-center items-center mt-12 pb-24">
       <div className="max-w-2xl w-full p-6 border rounded-lg shadow-lg bg-white">
         <h2 className="text-2xl font-bold text-center mb-6 uppercase flex items-center justify-center gap-3">
           <FaUserPlus />
           Register Staff
-          <span className="text-secondary text-3xl font-extrabold italic">
+          <span className="text-primary text-3xl font-extrabold italic">
             Mate
           </span>
         </h2>

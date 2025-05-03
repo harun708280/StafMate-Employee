@@ -10,7 +10,7 @@ export default {
       extend: {
           colors: {
               primary: {
-                  DEFAULT: '#134E4A',
+                  DEFAULT: '#A21CAF',
                   foreground: 'hsl(var(--primary-foreground))'
               },
               secondary: {
@@ -51,7 +51,7 @@ export default {
               }
           },
           backgroundImage: {
-              nav: "url('/src/assets/nav-bg.jpg')" // এখানে তোমার ইমেজের সঠিক পাথ দাও
+              nav: "url('/src/assets/nav-bg.jpg')" 
           },
           boxShadow: {
               'bottom-xl': '0 10px 15px -3px rgba(0, 0, 0, 0.3)'

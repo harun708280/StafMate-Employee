@@ -29,7 +29,7 @@ function MainApp() {
             <div className="flex h-screen justify-center items-center bg-gray-100">
               <div className="text-center">
                 <div className="loader"></div>
-                <p className="text-lg font-semibold text-gray-600 mt-2"><GridLoader color='#134E4A' />.</p>
+                <p className="text-lg font-semibold text-gray-600 mt-2"><GridLoader color='#A21CAF' />.</p>
               </div>
             </div>
           ) : (
