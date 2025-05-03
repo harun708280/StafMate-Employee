@@ -4,9 +4,16 @@ import { Outlet } from 'react-router-dom';
 
 const AdminLayOut = () => {
     return (
-        <div className='bg-[#020a13] min-h-svh flex flex-col md:flex-row gap-12 text-white'>
-            <DashNav></DashNav>
-            <Outlet></Outlet>
+        <div className="bg-[#020a13] min-h-screen flex gap-24 text-white overflow-hidden">
+            {/* Fixed Sidebar */}
+            <div className="w-[250px] h-screen sticky top-0 left-0">
+                <DashNav />
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto h-screen p-4">
+                <Outlet />
+            </div>
         </div>
     );
 };

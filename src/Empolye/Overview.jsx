@@ -65,19 +65,19 @@ const Overview = () => {
   };
 
   return (
-    <div className="my-7 w-11/12 mx-auto">
+    <div className="my-7 w-11/12 mx-auto z-20">
       {/* Header Section */}
       <div className="flex justify-between items-center">
-        <h1 className="md:text-3xl font-extrabold">Dashboard <span  className="text-secondary" >Employee</span> </h1>
+        <h1 className="md:text-3xl font-extrabold">Dashboard <span  className="text-primary" >Employee</span> </h1>
         <div className="flex gap-6">
           <button
-            className="bg-secondary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
+            className="bg-primary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
             aria-label="Export data"
           >
             <CiExport /> Export
           </button>
           <button
-            className="bg-secondary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
+            className="bg-primary py-2 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
             aria-label="Print data"
           >
             <IoMdPrint /> Print
@@ -95,7 +95,7 @@ const Overview = () => {
         <h1 className="text-2xl font-bold uppercase"> Task Board</h1>
         <button
           onClick={() => setIsModalOpen(true)} // Correct state function
-          className="py-2 px-4 uppercase font-bold bg-secondary rounded-lg flex items-center gap-2"
+          className="py-2 px-4 uppercase font-bold bg-primary rounded-lg flex items-center gap-2"
         >
           <IoMdAdd /> Submit Task
         </button>
@@ -168,7 +168,7 @@ const Overview = () => {
             <div className="flex items-center mt-12">
               <button
                 type="submit"
-                className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Submit
               </button>

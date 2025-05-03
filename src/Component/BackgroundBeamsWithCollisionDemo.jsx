@@ -38,7 +38,7 @@ export function BackgroundBeamsWithCollisionDemo() {
   const [role] = useUserRole();
   return (
     <motion.div
-      className=" py-20 md:py-32 overflow-hidden relative"
+      className=" py-10 overflow-hidden relative"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -95,7 +95,7 @@ export function BackgroundBeamsWithCollisionDemo() {
             animate={{ y: [0, 30, 0] }}
             transition={{ duration: 5, repeat: Infinity }}
             className="md:w-[700px]  md:h-[500px] rounded-lg border-2 border-primary"
-            src={"/assets/dash.png"}
+            src={"/dd.png"}
             alt="Dashboard"
           />
         </div>

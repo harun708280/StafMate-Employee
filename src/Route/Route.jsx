@@ -26,6 +26,7 @@ import Message from "../Admin/Message";
 import EmployeeDetails from "../Admin/EmployeeDetails";
 import Profile from "@/Empolye/Profile";
 import About from "@/Component/About";
+import Setting from "@/Empolye/Sating";
 
 const router = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         {
           path:'/dashboard/profile',
           element:<Private><Profile></Profile></Private>
+        },
+        {
+          path:'/dashboard/settings',
+          element:<Setting/>
         }
         
       ]
@@ -96,6 +101,10 @@ const router = createBrowserRouter([
         {
           path:'/hrDashboard/profile',
           element:<Private><Profile></Profile></Private>
+        },
+        {
+          path:'/hrDashboard/settings',
+          element:<Setting/>
         }
       ]
     },
@@ -126,6 +135,10 @@ const router = createBrowserRouter([
         {
           path:'/adminDashboard/profile',
           element:<Private><Profile></Profile></Private>
+        },
+        {
+          path:'/adminDashboard/settings',
+          element:<Setting/>
         }
       ]
     }

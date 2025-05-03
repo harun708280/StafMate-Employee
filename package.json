@@ -26,6 +26,7 @@
     "flowbite-react": "^0.10.2",
     "formik": "^2.4.6",
     "framer-motion": "^11.18.2",
+    "html2pdf.js": "^0.10.3",
     "localforage": "^1.10.0",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.475.0",

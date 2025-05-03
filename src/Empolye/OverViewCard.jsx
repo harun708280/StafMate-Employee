@@ -9,7 +9,7 @@ const OverViewCard = () => {
                     <h1>Total Payment</h1>
                     <p className='text-2xl font-bold'><MdOutlinePayments /></p>
                 </div>
-                <h1 className='text-3xl font-bold my-2'>23000 $</h1>
+                <h1 className='text-3xl font-bold my-2'>00 $</h1>
                 <p className='text-gray-300'>Displays the total number of pending tasks</p>
             </div>
             <div className="border rounded-xl border-primary bg-primary p-4 bg-opacity-30">
@@ -17,7 +17,7 @@ const OverViewCard = () => {
                     <h1>Total Work Time </h1>
                     <p className='text-2xl font-bold'><MdOutlinePendingActions /></p>
                 </div>
-                <h1 className='text-3xl font-bold my-2'>378 <span className='text-sm'>min</span></h1>
+                <h1 className='text-3xl font-bold my-2'>8 <span className='text-sm'>min</span></h1>
                 <p className='text-gray-300'>Displays the total number of pending tasks</p>
             </div>
             <div className="border rounded-xl border-primary bg-primary p-4 bg-opacity-30">
@@ -25,7 +25,7 @@ const OverViewCard = () => {
                     <h1>Complete Task</h1>
                     <p className='text-2xl font-bold'><MdAddTask /></p>
                 </div>
-                <h1 className='text-3xl font-bold my-2'>3</h1>
+                <h1 className='text-3xl font-bold my-2'>1</h1>
                 <p className='text-gray-300'>Displays the total number of pending tasks</p>
             </div>
             
@@ -34,7 +34,7 @@ const OverViewCard = () => {
                     <h1>Position</h1>
                     <p className='text-2xl font-bold'><FaFlagCheckered /></p>
                 </div>
-                <h1 className='text-3xl font-bold my-2'>1</h1>
+                <h1 className='text-3xl font-bold my-2'>76</h1>
                 <p className='text-gray-300'>Displays the total number of pending tasks</p>
             </div>
         </div>

@@ -18,7 +18,7 @@ const Nav = () => {
   console.log(role);
 
   return (
-    <div className=" border-b border-gray-500 bg-opacity-15 w-full fixed mb-12 top-0 z-50 text-white">
+    <div className=" border-b bg-[#111827] border-gray-500 bg-opacity-15 w-full fixed mb-12 top-0 z-50 text-white">
       <div className="navbar w-11/12 mx-auto max-[1600px]">
         <div className="navbar-start">
           <div className="dropdown">

@@ -9,17 +9,17 @@ const AdminOverView = () => {
     <div>
       <div className="flex justify-between items-center mr-5 mt-12">
         <h1 className="md:text-3xl font-extrabold">
-          Dashboard <span className="text-secondary">Admin</span>{" "}
+          Dashboard <span className="text-primary">Admin</span>{" "}
         </h1>
         <div className="flex gap-6">
           <button
-            className="bg-secondary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
+            className="bg-primary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
             aria-label="Export data"
           >
             <CiExport /> Export
           </button>
           <button
-            className="bg-secondary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
+            className="bg-primary py-1 px-4 rounded-lg text-lg font-semibold flex items-center gap-2"
             aria-label="Print data"
           >
             <IoMdPrint /> Print
